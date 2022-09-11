@@ -1,0 +1,23 @@
+.constructorWrapper {
+    max-width: 600px;
+}
+
+.constructorList {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.finalPrice {
+    display: flex;
+    align-items: center;
+
+    span {
+        margin-right: 8px;
+    }
+}
+
+.orderInfo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
