@@ -1,0 +1,33 @@
+@import '../app/App.scss';
+
+header {
+    background-color: $modal-bg;
+}
+
+.navWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    width: 1280px;
+    padding: 0 40px;
+    margin: 0 auto;
+}
+
+.navBtn {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    width: 290px;
+    margin: 0 auto;
+}
