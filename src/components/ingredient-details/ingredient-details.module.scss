@@ -1,0 +1,19 @@
+.ingredientDetailWrapper {
+    display: block;
+    text-align: center;
+
+    &__image {
+        width: 480px;
+        height: 240px;
+    }
+
+    h3, p {
+        margin: 0;
+    }
+
+    &__detailsList {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+    }
+}
