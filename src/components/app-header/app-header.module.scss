@@ -1,7 +1,5 @@
-@import '../app/App.scss';
-
 header {
-    background-color: $modal-bg;
+    background-color: #1C1C21;
 }
 
 .navWrapper {
@@ -9,7 +7,6 @@ header {
     justify-content: space-between;
     align-items: center;
     position: relative;
-
     width: 1280px;
     padding: 0 40px;
     margin: 0 auto;
@@ -18,8 +15,15 @@ header {
 .navBtn {
     display: flex;
     align-items: center;
-
     cursor: pointer;
+
+    a {
+        text-decoration: none;    
+    }
+
+    .constructorLink {
+        color: #F2F2F3;  
+    }
 }
 
 .logo {
