@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './burger-ingredients.module.scss';
+import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsGroup from '../ingredients-group/ingredients-group';
 import IngredientDetail from '../ingredient-details/ingredient-details';

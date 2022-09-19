@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ingredient-details.module.scss';
+import styles from './ingredient-details.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientPropTypes} from '../../utils/ingredientPropType';
 

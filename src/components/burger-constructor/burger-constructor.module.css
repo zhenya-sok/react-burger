@@ -12,20 +12,21 @@
     max-height: 464px;
     overflow-y: scroll;
     scrollbar-width: thin;
-
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background-color: #2F2F37;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        height: 292px;
-        background-color: #8585AD;
-    }
 }
+
+.ingredientsCombo::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ingredientsCombo::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+}
+
+.ingredientsCombo::-webkit-scrollbar-thumb {
+    height: 292px;
+    background-color: #8585AD;
+}
+
 
 .ingredientItem {
     width: 568px;
@@ -33,19 +34,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
 
-    &:last-of-type {
-        margin: 0;
-    }
+.ingredientItem:last-of-type {
+    margin: 0;
 }
 
 .finalPrice {
     display: flex;
     align-items: center;
+}
 
-    span {
-        margin-right: 8px;
-    }
+.finalPrice span {
+    margin-right: 8px;
 }
 
 .orderInfo {

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './modal.module.scss';
+import styles from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import ReactDOM from 'react-dom';
@@ -24,9 +24,9 @@ const Modal = ({children, closeModal, titleText}) => {
         <>
             <ModalOverlay>
                 <div className={`${styles.modal} pl-10 pr-10 pt-10 pb-15`}>
-                    <div className={styles.title}>
+                    <div className={styles.modal__title}>
                         <h2 className="text text_type_main-large">{titleText}</h2>
-                        <div className={styles.closeBtn} onClick={closeModal}>
+                        <div className={styles.modal__closeBtn} onClick={closeModal}>
                             <CloseIcon type="primary" />
                         </div>
                     </div>

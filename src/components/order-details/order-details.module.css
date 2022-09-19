@@ -4,13 +4,13 @@
     align-items: center;
 }
 
-.bookingNumber {
+.orderDetails__bookingNumber {
     width: 520px;
     height: 120px;
     text-align: center;
 }
 
-.image {
+.orderDetails__image {
     width: 120px;
     height: 120px;
     margin: 60px 0;

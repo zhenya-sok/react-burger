@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ingredients-group.module.scss';
+import styles from './ingredients-group.module.css';
 import Ingredient from '../ingredient/ingredient';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/ingredientPropType';

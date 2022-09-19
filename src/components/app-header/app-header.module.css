@@ -16,14 +16,14 @@ header {
     display: flex;
     align-items: center;
     cursor: pointer;
+}
 
-    a {
-        text-decoration: none;    
-    }
+.constructorLink {
+    color: #F2F2F3;  
+}
 
-    .constructorLink {
-        color: #F2F2F3;  
-    }
+.navBtn a {
+    text-decoration: none;    
 }
 
 .logo {
