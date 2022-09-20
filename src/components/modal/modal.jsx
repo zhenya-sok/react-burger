@@ -21,19 +21,17 @@ const Modal = ({children, closeModal, titleText}) => {
     }, [closeModal]);
 
     return ReactDOM.createPortal(
-        <>
-            <ModalOverlay>
-                <div className={`${styles.modal} pl-10 pr-10 pt-10 pb-15`}>
-                    <div className={styles.modal__title}>
-                        <h2 className="text text_type_main-large">{titleText}</h2>
-                        <div className={styles.modal__closeBtn} onClick={closeModal}>
-                            <CloseIcon type="primary" />
-                        </div>
+        <ModalOverlay closeModal={closeModal}>
+            <div className={`${styles.modal} pl-10 pr-10 pt-10 pb-15`}>
+                <div className={styles.modal__title}>
+                    <h2 className="text text_type_main-large">{titleText}</h2>
+                    <div className={styles.modal__closeBtn} onClick={closeModal}>
+                        <CloseIcon type="primary" />
                     </div>
-                    <div className={styles.modalContent}>{children}</div>
                 </div>
-            </ModalOverlay>
-        </>,
+                <div className={styles.modalContent}>{children}</div>
+            </div>
+        </ModalOverlay>,
         modalElement
     )
 }

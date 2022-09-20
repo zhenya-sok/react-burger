@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ingredients-group.module.css';
-import Ingredient from '../ingredient/ingredient';
+import IngredientSection from '../ingredient/ingredient-section';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/ingredientPropType';
 
@@ -12,9 +12,9 @@ const IngredientsGroup = ({ingredients, type, showDetails}) => {
 
     return (
         <div className={`${styles.ingredientsBlock} pl-4 pr-4 pt-6 pb-2`}>
-            {type === "bun" && <Ingredient key={ingredients._id} showDetails={showDetails} ingredientData={bunsList} />}
-            {type === "sauce" && <Ingredient key={ingredients._id} showDetails={showDetails} ingredientData={saucesList} />}
-            {type === "main" && <Ingredient key={ingredients._id} showDetails={showDetails} ingredientData={mainList} />}
+            {type === "bun" && <IngredientSection key={ingredients._id} showDetails={showDetails} ingredientData={bunsList} />}
+            {type === "sauce" && <IngredientSection key={ingredients._id} showDetails={showDetails} ingredientData={saucesList} />}
+            {type === "main" && <IngredientSection key={ingredients._id} showDetails={showDetails} ingredientData={mainList} />}
         </div>
     )
 }

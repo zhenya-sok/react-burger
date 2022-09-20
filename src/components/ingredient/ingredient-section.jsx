@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './ingredient.module.css';
+import styles from './ingredient-section.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/ingredientPropType';
 
-const Ingredient = ({ ingredientData, showDetails }) => {
+const IngredientSection = ({ ingredientData, showDetails }) => {
 
     return (
         <>
@@ -23,9 +23,9 @@ const Ingredient = ({ ingredientData, showDetails }) => {
     )
 }
 
-Ingredient.propTypes = {
+IngredientSection.propTypes = {
     ingredientData: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
     showDetails: PropTypes.func.isRequired,
 }
 
-export default Ingredient;
+export default IngredientSection;

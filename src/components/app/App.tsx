@@ -19,13 +19,11 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <div className="appWrapper">
         <AppHeader />
         <main className={styles.mainWrapper}>
           <BurgerIngredients ingredients={ingredients} />
           <BurgerConstructor ingredients={ingredients} />
         </main>
-      </div>
     </div>
   );
 }

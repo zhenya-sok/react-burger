@@ -47,10 +47,11 @@ const BurgerIngredients = ({ingredients}) => {
                </li>
             </ul>
         </section>
-        {detailsVisible && 
-        <Modal closeModal={closeIngredientDetails} titleText="Детали ингредиента">
-            <IngredientDetail ingredientInfo={currentItem}/>
-        </Modal>}
+        {detailsVisible && (
+            <Modal closeModal={closeIngredientDetails} titleText="Детали ингредиента">
+                <IngredientDetail ingredientInfo={currentItem}/>
+            </Modal>
+        )}
        </>
     )
 }

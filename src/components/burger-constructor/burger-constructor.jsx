@@ -42,7 +42,6 @@ const BurgerConstructor = ({ ingredients }) => {
                             <div className={`${styles.ingredientItem} mb-4`} key={index}>
                                 <DragIcon />
                                 <ConstructorElement
-                                    type="top"
                                     isLocked={false}
                                     text={item.name}
                                     price={item.price}
@@ -71,9 +70,11 @@ const BurgerConstructor = ({ ingredients }) => {
                 </div>
                 <Button type="primary" size="large" onClick={showOrderNumber}>Оформить заказ</Button>
             </div>
-            {orderVisible && <Modal closeModal={closeOrderNumber}>
-                <OrderDetails bookingNumber="034536" />
-            </Modal>}
+            {orderVisible && (
+                <Modal closeModal={closeOrderNumber}>
+                    <OrderDetails bookingNumber="034536" />
+                </Modal>
+            )}
         </section>
     )
 }
