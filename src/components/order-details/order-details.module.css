@@ -1,0 +1,17 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.orderDetails__bookingNumber {
+    width: 520px;
+    height: 120px;
+    text-align: center;
+}
+
+.orderDetails__image {
+    width: 120px;
+    height: 120px;
+    margin: 60px 0;
+}

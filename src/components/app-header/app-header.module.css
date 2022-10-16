@@ -1,0 +1,37 @@
+header {
+    background-color: #1C1C21;
+}
+
+.navWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 1280px;
+    padding: 0 40px;
+    margin: 0 auto;
+}
+
+.navBtn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.constructorLink {
+    color: #F2F2F3;  
+}
+
+.navBtn a {
+    text-decoration: none;    
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    width: 290px;
+    margin: 0 auto;
+}

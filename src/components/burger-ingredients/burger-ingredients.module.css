@@ -1,0 +1,28 @@
+.ingredientsWrapper {
+    width: 600px;
+}
+
+.ingredientsTab {
+    display: flex;
+}
+
+.ingredientsList {
+    height: 706px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    list-style: none;
+    padding: 0;
+}
+
+.ingredientsList::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ingredientsList::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+}
+
+.ingredientsList::-webkit-scrollbar-thumb {
+    height: 492px;
+    background-color: #8585AD;
+}
