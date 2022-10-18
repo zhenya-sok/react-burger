@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './App.module.css';
+import styles from './app.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';

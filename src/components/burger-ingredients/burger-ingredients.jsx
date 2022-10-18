@@ -33,21 +33,21 @@ const BurgerIngredients = () => {
             </div>
 
             <div className={`${styles.ingredientsList} mt-10`}>
-                <IngredientsGroup
+                {ingredientsCategories.bun && <IngredientsGroup
                     title="Булки"
                     ingredients={ingredientsCategories.bun}
                     showDetails={showIngredientDetails}
-                />
-                <IngredientsGroup 
+                />}
+                {ingredientsCategories.sauce && <IngredientsGroup 
                     title="Соусы"
                     ingredients={ingredientsCategories.sauce} 
                     showDetails={showIngredientDetails}
-                />
-                <IngredientsGroup
+                />}
+                {ingredientsCategories.main && <IngredientsGroup
                     title="Онсновное"
                     ingredients={ingredientsCategories.main}
                     showDetails={showIngredientDetails}
-                />
+                />}
             </div>
         </section>
         {detailsVisible && (

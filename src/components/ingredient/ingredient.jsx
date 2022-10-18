@@ -7,7 +7,7 @@ import { IngredientDataContext } from '../../services/ingredientDataContext';
 
 const Ingredient = ({ ingredientData, showDetails }) => {
 
-    const { appSelectedIngredient, selectedIngredients } = useContext(IngredientDataContext);
+    const { appSelectedIngredient } = useContext(IngredientDataContext);
     const [count, setCounter] = useState(null);
 
     const countHandler = () => {
@@ -15,12 +15,14 @@ const Ingredient = ({ ingredientData, showDetails }) => {
         addIngredient && setCounter(count + 1);
     }
 
+    const chooseIngredient = (ingredientData) => {
+        showDetails(ingredientData);
+        countHandler();
+    }
+
     return (
         <>
-            {/* Временно закомментировал открытие модального окна с информацией об ингредиенте, чтобы протестировать работу корзины */}
-
-            <div className={`${styles.ingredientsItem}`} key={ingredientData._id} /* onClick={() => showDetails(ingredientData)} */
-            onClick={() => countHandler()}>
+            <div className={`${styles.ingredientsItem}`} onClick={() => chooseIngredient(ingredientData)}>
                 <img className={`${styles.ingredientsItem__image} pr-4 pl-4`} src={ingredientData.image} alt="изображение ингредиента" />
                 <div className={`${styles.ingredientsItem__price} mt-1 mb-1`}>
                     <span className="text text_type_digits-default mt-1 mb-1">{ingredientData.price}</span>
@@ -34,7 +36,7 @@ const Ingredient = ({ ingredientData, showDetails }) => {
 }
 
 Ingredient.propTypes = {
-    ingredientData: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
+    ingredientData: PropTypes.object.isRequired,
     showDetails: PropTypes.func.isRequired,
 }
 

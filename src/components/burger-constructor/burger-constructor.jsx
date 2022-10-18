@@ -94,7 +94,7 @@ const BurgerConstructor = () => {
                 </div>
                 <Button type="primary" size="large" onClick={showOrderNumber}>Оформить заказ</Button>
             </div>
-            {orderVisible && (
+            {orderVisible && orderData.order && (
                 <Modal closeModal={closeOrderNumber}>
                     <OrderDetails bookingNumber={orderData.order && orderData.order.number} />
                 </Modal>

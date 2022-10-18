@@ -16,9 +16,9 @@ const IngredientsGroup = ({title, ingredients, showDetails}) => {
                     return (
                         <Ingredient
                             ingredientData={ingredient}
-                            key={ingredient._id}
                             onClick={showDetails}
                             showDetails={showDetails}
+                            key={ingredient._id}
                         />
                     )
                 })}
@@ -29,7 +29,6 @@ const IngredientsGroup = ({title, ingredients, showDetails}) => {
 
 IngredientsGroup.propTypes = {
     ingredients: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
-    type: PropTypes.string.isRequired,
     showDetails: PropTypes.func.isRequired,
 }
 
