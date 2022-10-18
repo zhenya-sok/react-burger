@@ -1,19 +1,18 @@
-const ingredientsListUrl = "https://norma.nomoreparties.space/api/ingredients";
+import {checkResponse} from "../utils/checkResponse";
+
+const BASE_URL = "https://norma.nomoreparties.space/api"
+
+const ingredientsListUrl = `${BASE_URL}/ingredients`;
 
 export function loadIngredients() {
   return fetch(ingredientsListUrl)
-  .then(res => {
-                if (res.ok) {
-                  return res.json();
-                }
-                return Promise.reject(`Ошибка ${res.status}`);
-              })
+  .then(checkResponse)
   .then(data => {
     if (data.success) return data.data;
   })
 };
 
-const orderDetailsUrl = "https://norma.nomoreparties.space/api/orders";
+const orderDetailsUrl = `${BASE_URL}/orders`;
 
 export function loadOrderDetails(newOrder) {
   return fetch(orderDetailsUrl, {
@@ -23,8 +22,8 @@ export function loadOrderDetails(newOrder) {
       'Content-type': 'application/json; charset=UTF-8',
     },
   })
-    .then((response) => response.json())
-    .then((data) => {
+    .then(checkResponse)
+    .then(data => {
       if (data.success) return data;
     })
 }
