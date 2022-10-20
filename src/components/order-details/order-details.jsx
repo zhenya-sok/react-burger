@@ -4,6 +4,7 @@ import orderIsAccepted from '../../images/orderIsAccepted.svg';
 import PropTypes from 'prop-types';
 
 const OrderDetails = ({bookingNumber}) => {
+
     return(
         <div className={styles.wrapper}>
             <p className={`${styles.orderDetails__bookingNumber} text text_type_digits-large mt-4 mb-8`}>{bookingNumber}</p>
@@ -16,7 +17,7 @@ const OrderDetails = ({bookingNumber}) => {
 }
 
 OrderDetails.propTypes = {
-    bookingNumber: PropTypes.string.isRequired,
+    bookingNumber: PropTypes.number.isRequired,
 }
 
 export default OrderDetails;
