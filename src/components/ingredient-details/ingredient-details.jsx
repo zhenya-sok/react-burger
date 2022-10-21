@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientPropTypes} from '../../utils/ingredientPropType';
+import { useSelector } from 'react-redux';
 
-const IngredientDetail = ({ ingredientInfo }) => {
+const IngredientDetail = () => {
+    const ingredientInfo = useSelector((state) => state.ingredientsReducer.currentItem);
+
+    console.log(ingredientInfo);
 
     return (
         <div className={styles.ingredientDetailWrapper} >
@@ -29,10 +32,6 @@ const IngredientDetail = ({ ingredientInfo }) => {
             </ul>
         </div>
     )
-}
-
-IngredientDetail.propTypes = {
-    ingredientInfo: ingredientPropTypes.isRequired,
 }
 
 export default IngredientDetail;

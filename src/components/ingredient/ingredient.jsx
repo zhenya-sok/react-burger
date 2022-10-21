@@ -4,6 +4,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../utils/ingredientPropType';
 import { IngredientDataContext } from '../../services/ingredientDataContext';
+import { useDrag } from 'react-dnd';
 
 const Ingredient = ({ ingredientData, showDetails }) => {
 
@@ -17,11 +18,12 @@ const Ingredient = ({ ingredientData, showDetails }) => {
 
     const chooseIngredient = (ingredientData) => {
         showDetails(ingredientData);
-        countHandler();
     }
+    
+  
 
     return (
-        <>
+        <div>
             <div className={`${styles.ingredientsItem}`} onClick={() => chooseIngredient(ingredientData)}>
                 <img className={`${styles.ingredientsItem__image} pr-4 pl-4`} src={ingredientData.image} alt="изображение ингредиента" />
                 <div className={`${styles.ingredientsItem__price} mt-1 mb-1`}>
@@ -31,7 +33,7 @@ const Ingredient = ({ ingredientData, showDetails }) => {
                 <div className={`${styles.ingredientsItem__title} text text_type_main-default`}>{ingredientData.name}</div>
                 {count && <Counter count={count} size="default" />}
             </div>
-        </>
+        </div>
     )
 }
 

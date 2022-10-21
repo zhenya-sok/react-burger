@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
 import { CurrencyIcon, ConstructorElement, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -6,14 +6,19 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { IngredientDataContext } from '../../services/ingredientDataContext';
 import { loadOrderDetails } from '../../utils/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOrderDetail } from '../../services/actions';
+import { useDrag, useDrop } from 'react-dnd';
 
 const BurgerConstructor = () => {
-    const { selectedIngredients } = useContext(IngredientDataContext);
+    const { selectedIngredients, appSelectedIngredient } = useContext(IngredientDataContext);
     const [orderVisible, setOrderVisible] = useState(false);
-    const [orderData, setOrderData] = useState([]);
-
+    const dispatch = useDispatch();
     const selectedBun = selectedIngredients && selectedIngredients.find((item) => item.type === "bun");
     const selectedIngredientsId = selectedIngredients.map((item) => item._id);
+    const orderData = useSelector((state) => state.ingredientsReducer.orderData);
+
+    console.log(orderData);
 
     const newOrder = {
         ingredients: [...selectedIngredientsId],
@@ -30,19 +35,22 @@ const BurgerConstructor = () => {
     const showOrderNumber = () => {
         setOrderVisible(true);
 
-        loadOrderDetails(newOrder)
-            .then(setOrderData)
-            .catch(err => {
-                alert("Произошла ошибка при загрузке данных.")
-            });
+        dispatch(setOrderDetail(newOrder))
+
+        // loadOrderDetails(newOrder)
+        //     .then((value) => dispatch(setOrderDetail(value)))
+        //     .catch(err => {
+        //         alert("Произошла ошибка при загрузке данных.")
+        //     });
     };
 
     const closeOrderNumber = () => {
         setOrderVisible(false);
-    };
-
+    };    
+     
     return (
-        <section className={`${styles.constructorWrapper} pl-4 pt-25`}>
+        <section 
+        className={`${styles.constructorWrapper}  pl-4 pt-25`} >
             <div className={styles.constructorList}>
 
                 {selectedBun &&
@@ -64,6 +72,7 @@ const BurgerConstructor = () => {
                                 <div className={`${styles.ingredientItem} mb-4`} key={index}>
                                     <DragIcon />
                                     <ConstructorElement
+                                        onClick={() => console.log("hi")}
                                         isLocked={false}
                                         text={item.name}
                                         price={item.price}
