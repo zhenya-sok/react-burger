@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
 import { 
-        ADD_INGREDIENTS,
         ADD_INGREDIENTS_REQUEST,
         ADD_INGREDIENTS_SUCCESS,
         ADD_INGREDIENTS_ERROR,
 
-        SELECT_INGREDIENT, 
+        SELECT_INGREDIENT,
         SET_CURRENT_ITEM,
 
-        SET_ORDER_DETAIL,
         SET_ORDER_DETAIL_REQUEST,
         SET_ORDER_DETAIL_SUCCESS,
         SET_ORDER_DETAIL_ERROR,
@@ -53,12 +51,6 @@ const ingredientsReducer = (state = initialState, action) => {
                 ingredientsRequest: false
             }
         }
-        // case ADD_INGREDIENTS: {
-        //     return { 
-        //         ...state,
-        //         ingredients: action.payload
-        //     }
-        // }
 
         case SELECT_INGREDIENT: {
             return {
@@ -73,12 +65,6 @@ const ingredientsReducer = (state = initialState, action) => {
             }
         }
 
-        // case SET_ORDER_DETAIL: {
-        //     return {
-        //         ...state,
-        //         orderData: action.payload
-        //     }
-        // }
         case SET_ORDER_DETAIL_REQUEST: {
             return {
                 ...state,
@@ -96,6 +82,7 @@ const ingredientsReducer = (state = initialState, action) => {
         case SET_ORDER_DETAIL_ERROR: {
             return {
                 ...state, 
+                orderData: [],
                 orderDataError: true, 
                 orderDataRequest: false
             }
