@@ -1,13 +1,12 @@
 import { loadIngredients, loadOrderDetails } from '../../utils/api';
 
-export const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
 export const ADD_INGREDIENTS_REQUEST = 'ADD_INGREDIENTS_REQUEST';
 export const ADD_INGREDIENTS_SUCCESS = 'ADD_INGREDIENTS_SUCCESS';
 export const ADD_INGREDIENTS_ERROR = 'ADD_INGREDIENTS_ERROR';
+
 export const SELECT_INGREDIENT = 'SELECT_INGREDIENT';
 export const SET_CURRENT_ITEM = 'SET_CURRENT_ITEM';
 
-export const SET_ORDER_DETAIL = 'SET_ORDER_DETAIL';
 export const SET_ORDER_DETAIL_REQUEST = 'SET_ORDER_DETAIL_REQUEST';
 export const SET_ORDER_DETAIL_SUCCESS = 'SET_ORDER_DETAIL_SUCCESS';
 export const SET_ORDER_DETAIL_ERROR = 'SET_ORDER_DETAIL_ERROR';
@@ -35,13 +34,6 @@ export function addIngredients() {
     };
 }
 
-// export const addIngredients = (payload) => {
-//     return {
-//         type: ADD_INGREDIENTS,
-//         payload,
-//     }
-// }
-
 export const addSelectIngredient = (payload) => {
     return {
         type: SELECT_INGREDIENT,
@@ -55,13 +47,6 @@ export const setCurrentItem = (payload) => {
         payload,
     }
 }
-
-// export const setOrderDetail = (payload) => {
-//     return {
-//         type: SET_ORDER_DETAIL,
-//         payload,
-//     }
-// }
 
 export function setOrderDetail(newOrder) {
     return function (dispatch) {
@@ -79,6 +64,14 @@ export function setOrderDetail(newOrder) {
                     type: SET_ORDER_DETAIL_ERROR
                 });
             }
-        });
+        })
+        .catch(err => dispatch({ type: SET_ORDER_DETAIL_ERROR }))
     };
+}
+
+export function updateIngredientsList(payload) {
+    return {
+        type: UPDATE_CONSTRUCTOR_LIST,
+        payload
+    }
 }
