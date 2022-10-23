@@ -4,14 +4,12 @@ import '@ya.praktikum/react-developer-burger-ui-components';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { loadIngredients } from '../../utils/api';
 import { IngredientDataContext } from '../../services/ingredientDataContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { addIngredients, addSelectIngredient } from '../../services/actions';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { v4 as uuid } from 'uuid';
-
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +28,7 @@ function App() {
   const appSelectedIngredient = (ingredientRaw) => {
     const ingredient = {
       ...ingredientRaw,
+      position: selectIngredientFromStore.length + 1,
       dragId: uuid()
     }
 
@@ -45,7 +44,7 @@ function App() {
     dispatch(addSelectIngredient([...selectIngredientFromStore, ingredient]))
     return true;
   }
- 
+
   const contextValue = {
     ingredients: ingredientsFromStore,
     selectedIngredients: selectIngredientFromStore,
@@ -59,15 +58,15 @@ function App() {
 
   return (
     <div className={styles.app}>
-        <AppHeader />
-        <main className={styles.mainWrapper}>
-          <DndProvider backend={HTML5Backend}>
-            <IngredientDataContext.Provider value={contextValue}>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </IngredientDataContext.Provider>
-          </DndProvider>
-        </main>
+      <AppHeader />
+      <main className={styles.mainWrapper}>
+        <DndProvider backend={HTML5Backend}>
+          <IngredientDataContext.Provider value={contextValue}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </IngredientDataContext.Provider>
+        </DndProvider>
+      </main>
     </div>
   );
 }
