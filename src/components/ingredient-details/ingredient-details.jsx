@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux';
 const IngredientDetail = () => {
     const ingredientInfo = useSelector((state) => state.ingredientsReducer.currentItem);
 
-    console.log(ingredientInfo);
-
     return (
         <div className={styles.ingredientDetailWrapper} >
             <img className={`${styles.ingredientDetailWrapper__image} mb-4`} src={ingredientInfo.image_large} alt="изображение ингредиента" />

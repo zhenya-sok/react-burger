@@ -7,9 +7,6 @@ const ingredientsListUrl = `${BASE_URL}/ingredients`;
 export function loadIngredients() {
   return fetch(ingredientsListUrl)
   .then(checkResponse)
-  // .then(data => {
-  //   if (data.success) return data.data;
-  // })
 };
 
 const orderDetailsUrl = `${BASE_URL}/orders`;
@@ -23,7 +20,4 @@ export function loadOrderDetails(newOrder) {
     },
   })
     .then(checkResponse)
-    // .then(data => {
-    //   if (data.success) return data;
-    // })
 }
