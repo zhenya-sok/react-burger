@@ -2,11 +2,12 @@ import React from 'react'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
 import styles from './burger-constructor.module.css';
+import PropTypes from 'prop-types';
 
-export default function ConstructorElementWrapper({ type, isLocked, text, price, thumbnail, onClick, dragId, ingredientType, handleClose, draggable = false }) {
+export default function ConstructorElementWrapper({ type, isLocked, text, price, thumbnail, dragId, ingredientType, handleClose, draggable = false }) {
     const [{ opacity }, dragRef] = useDrag({
         type: 'selected-ingredient',
-        item: { type, isLocked, text, price, thumbnail, onClick, draggable, dragId, ingredientType },
+        item: { type, isLocked, text, price, thumbnail, draggable, dragId, ingredientType },
         collect: monitor => ({
             opacity: monitor.isDragging() ? 0.5 : 1
         })
@@ -21,9 +22,20 @@ export default function ConstructorElementWrapper({ type, isLocked, text, price,
                 text={text}
                 price={price}
                 thumbnail={thumbnail}
-                onClick={onClick}
                 handleClose={handleClose}
             />
         </div>
     )
+}
+
+ConstructorElementWrapper.propTypes = {
+    ingredientType: PropTypes.oneOf(["bun", "main", "sauce"]).isRequired,
+    isLocked: PropTypes.bool.isRequired,
+    text: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    dragId: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    handleClose: PropTypes.func,
+    draggable: PropTypes.bool,
 }
