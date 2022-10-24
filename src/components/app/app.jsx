@@ -14,7 +14,7 @@ import { v4 as uuid } from 'uuid';
 function App() {
   const dispatch = useDispatch();
   const ingredientsFromStore = useSelector((state) => state.ingredientsReducer.ingredients);
-  const selectIngredientFromStore = useSelector((state) => state.ingredientsReducer.selectedIngredients);
+  const selectIngredientFromStore = useSelector((state) => state.constructorReducer.selectedIngredients);
 
   const ingredientsCategories = ingredientsFromStore.reduce((all, current) => {
     const type = current.type
@@ -37,6 +37,7 @@ function App() {
     if (ingredient.type === "bun" && bunIndex !== -1) {
       const newSelectedIngredients = [...selectIngredientFromStore];
       newSelectedIngredients.splice(bunIndex, 1, ingredient);
+
       dispatch(addSelectIngredient(newSelectedIngredients));
       return
     }

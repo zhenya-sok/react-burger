@@ -4,7 +4,7 @@ import '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 
 const IngredientDetail = () => {
-    const ingredientInfo = useSelector((state) => state.ingredientsReducer.currentItem);
+    const ingredientInfo = useSelector((state) => state.modalIngredientReducer.currentItem);
 
     return (
         <div className={styles.ingredientDetailWrapper} >
