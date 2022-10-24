@@ -14,13 +14,8 @@ const BurgerConstructor = () => {
     const [orderVisible, setOrderVisible] = useState(false);
     const dispatch = useDispatch();
     const selectedBun = selectedIngredients && selectedIngredients.find((item) => item.type === "bun");
-    const selectedIngredientsId = selectedIngredients.map((item) => item._id);
-    const orderData = useSelector((state) => state.ingredientsReducer.orderData);
+    const orderData = useSelector((state) => state.orderReducer.orderData);
     const dragInsertBefore = useRef();
-
-    const newOrder = {
-        ingredients: [...selectedIngredientsId],
-    };
 
     const orderPrice = selectedIngredients.reduce((all, current) => {
         if (current.type === "bun") {
@@ -31,8 +26,13 @@ const BurgerConstructor = () => {
     }, 0)
 
     const showOrderNumber = () => {
+        const [bunId, ...rest] = selectedIngredients.map((item) => item._id);
+
+        dispatch(setOrderDetail({
+            ingredients: [bunId, ...rest, bunId],
+        }))
+
         setOrderVisible(true);
-        dispatch(setOrderDetail(newOrder))
     };
 
     const closeOrderNumber = () => {
@@ -105,12 +105,16 @@ const BurgerConstructor = () => {
     })
 
     return (
-        <section className={`${styles.constructorWrapper} ${isHover || isSelectedHover ? styles.onHover : ''} pl-4 pt-25`} ref={(el) => { dropTargetRef(el); selectedDropTargetRef(el) }}>
+        <section className={`${styles.constructorWrapper} 
+            ${isHover || isSelectedHover ? styles.onHover : ''} pl-4 pt-25`} 
+            ref={(el) => { dropTargetRef(el); selectedDropTargetRef(el) }}>
+
             <div className={styles.constructorList}>
 
                 {selectedBun &&
                     <div className={`${styles.bunIngredient} "mr-4 mb-4"`}>
                         <ConstructorElementWrapper
+                            dragId={selectedBun.dragId}
                             type="top"
                             ingredientType="bun"
                             isLocked={true}
@@ -143,6 +147,7 @@ const BurgerConstructor = () => {
                 {selectedBun &&
                     <div className={`${styles.bunIngredient} "mt-4"`}>
                         <ConstructorElementWrapper
+                            dragId={selectedBun.dragId}
                             type="bottom"
                             ingredientType="bun"
                             isLocked={true}
@@ -159,7 +164,11 @@ const BurgerConstructor = () => {
                     <span className="text text_type_digits-medium">{orderPrice}</span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" onClick={showOrderNumber}>Оформить заказ</Button>
+                <Button type="primary" size="large" 
+                    disabled={!selectedBun}
+                    onClick={showOrderNumber}>
+                    Оформить заказ
+                </Button>
             </div>
             {orderVisible && orderData.order && (
                 <Modal closeModal={closeOrderNumber}>
