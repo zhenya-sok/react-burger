@@ -10,6 +10,11 @@ import { addIngredients, addSelectIngredient } from '../../services/actions';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { v4 as uuid } from 'uuid';
+import { BrowserRouter, Router, Switch, Route } from 'react-router-dom';
+import Login from '../../pages/login/login';
+import Register from '../../pages/register/register';
+import ForgotPassword from '../../pages/forgot-password/forgot-password';
+import ResetPassword from '../../pages/reset-password/reset-password';
 
 function App() {
   const dispatch = useDispatch();
@@ -60,14 +65,41 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <main className={styles.mainWrapper}>
-        <DndProvider backend={HTML5Backend}>
-          <IngredientDataContext.Provider value={contextValue}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </IngredientDataContext.Provider>
-        </DndProvider>
-      </main>
+        <BrowserRouter>
+          <React.StrictMode>
+            <Switch>
+              <Route path="/" exact>
+                <main className={styles.mainWrapper}>
+                  <DndProvider backend={HTML5Backend}>
+                    <IngredientDataContext.Provider value={contextValue}>
+                      <BurgerIngredients />
+                      <BurgerConstructor />
+                    </IngredientDataContext.Provider>
+                  </DndProvider>
+                </main>
+              </Route>
+
+              <Route path="/login" exact>
+                <Login />
+              </Route>
+
+              <Route path="/register" exact>
+                <Register />
+              </Route>
+
+              <Route path="/forgot-password" exact>
+                <ForgotPassword />
+              </Route>
+
+              <Route path="/reset-password" exact>
+                <ResetPassword />
+              </Route>
+
+            </Switch>
+          </React.StrictMode>
+        </BrowserRouter>
+
+
     </div>
   );
 }
