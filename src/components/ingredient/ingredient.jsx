@@ -1,27 +1,27 @@
-import React, {useState, useContext} from 'react';
+import React from 'react';
 import styles from './ingredient.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { ingredientPropTypes } from '../../utils/ingredientPropType';
-import { IngredientDataContext } from '../../services/ingredientDataContext';
+import { useDrag } from 'react-dnd';
+import { useSelectedCountById } from '../../utils/useSelectedCountById';
 
 const Ingredient = ({ ingredientData, showDetails }) => {
-
-    const { appSelectedIngredient } = useContext(IngredientDataContext);
-    const [count, setCounter] = useState(null);
-
-    const countHandler = () => {
-        const addIngredient = appSelectedIngredient(ingredientData);
-        addIngredient && setCounter(count + 1);
-    }
+    const count = useSelectedCountById(ingredientData._id)
 
     const chooseIngredient = (ingredientData) => {
         showDetails(ingredientData);
-        countHandler();
     }
 
+    const [{ opacity }, dragRef] = useDrag({
+        type: 'ingredient',
+        item: { ...ingredientData },
+        collect: monitor => ({
+            opacity: monitor.isDragging() ? 0.5 : 1
+        })
+    })
+
     return (
-        <>
+        <div ref={dragRef} style={{ opacity }}>
             <div className={`${styles.ingredientsItem}`} onClick={() => chooseIngredient(ingredientData)}>
                 <img className={`${styles.ingredientsItem__image} pr-4 pl-4`} src={ingredientData.image} alt="изображение ингредиента" />
                 <div className={`${styles.ingredientsItem__price} mt-1 mb-1`}>
@@ -29,9 +29,9 @@ const Ingredient = ({ ingredientData, showDetails }) => {
                     <CurrencyIcon type="primary" />
                 </div>
                 <div className={`${styles.ingredientsItem__title} text text_type_main-default`}>{ingredientData.name}</div>
-                {count && <Counter count={count} size="default" />}
+                { count > 0 && <Counter count={count} size="default" /> }
             </div>
-        </>
+        </div>
     )
 }
 
