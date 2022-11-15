@@ -6,7 +6,7 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { IngredientDataContext } from '../../services/ingredientDataContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredients, addSelectIngredient } from '../../services/actions/ingredientsActions';
+import { addIngredients, addSelectIngredient, setCurrentItem } from '../../services/actions/ingredientsActions';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { v4 as uuid } from 'uuid';
@@ -77,6 +77,7 @@ function App() {
 
     const handleModalClose = () => {
       history.goBack();
+      dispatch(setCurrentItem(null));
     };
 
     return (
