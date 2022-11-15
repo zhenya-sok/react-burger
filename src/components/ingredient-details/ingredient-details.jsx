@@ -2,11 +2,14 @@ import React from 'react';
 import styles from './ingredient-details.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const IngredientDetail = () => {
-    const ingredientInfo = useSelector((state) => state.modalIngredientReducer.currentItem);
 
-    return (
+    const { id } = useParams();
+    const ingredientInfo = useSelector((state) => state.ingredientsReducer.ingredients.filter((e) => e._id === id))[0];
+
+    return (ingredientInfo && (
         <div className={styles.ingredientDetailWrapper} >
             <img className={`${styles.ingredientDetailWrapper__image} mb-4`} src={ingredientInfo.image_large} alt="изображение ингредиента" />
             <h3 className="pb-8 text text_type_main-medium">{ingredientInfo.name}</h3>
@@ -29,7 +32,7 @@ const IngredientDetail = () => {
                 </li>
             </ul>
         </div>
-    )
+    ))
 }
 
 export default IngredientDetail;
