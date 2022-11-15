@@ -1,30 +1,30 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useCallback } from 'react';
+import React from 'react';
 import styles from './register.module.css';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register } from '../../services/actions/authActions';
 
 const Register = () => {
+    const [nameValue, setNameValue] = React.useState('');
+    const [emailValue, setEmailValue] = React.useState('');
+    const [passwordValue, setPasswordValue] = React.useState('');
 
-    const [value, setValue] = React.useState('');
-    const onChange = e => {
-        setValue(e.target.value)
-    }
-
-    const [inputValue, setInputValue] = React.useState('')
-    const inputRef = React.useRef(null)
-    const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
-    }
-
+    const dispatch = useDispatch();
     const history = useHistory();
 
-    const navigateToLogin = useCallback(
-        () => {
-            history.replace({ pathname: '/login' });
-        },
-        [history]
-    );
+    const onPasswordChange = e => {
+        setPasswordValue(e.target.value)
+    }
+
+    const registerUser = () => {
+        dispatch(register({
+            email: emailValue,
+            password: passwordValue,
+            name: nameValue
+        }))
+        history.replace({ pathname: "/" });
+    }
 
     return (
         <section className={styles.registerWrapper}>
@@ -33,15 +33,12 @@ const Register = () => {
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
-                    onChange={e => setInputValue(e.target.value)}
-                    value={inputValue}
+                    onChange={e => setNameValue(e.target.value)}
+                    value={nameValue}
                     name={'name'}
                     error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
                     errorText={'Ошибка'}
                     size={'default'}
-                    extraClass="ml-1"
                 />
             </div>
 
@@ -49,32 +46,35 @@ const Register = () => {
                 <Input
                     type={'email'}
                     placeholder={'E-mail'}
-                    onChange={e => setInputValue(e.target.value)}
-                    value={inputValue}
+                    onChange={e => setEmailValue(e.target.value)}
+                    value={emailValue}
                     name={'name'}
                     error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
                     errorText={'Ошибка'}
                     size={'default'}
-                    extraClass="ml-1"
                 />
             </div>
 
             <div className={`${styles.registerInput} mb-6`}>
                 <PasswordInput
-                    onChange={onChange}
-                    value={value}
+                    onChange={onPasswordChange}
+                    value={passwordValue}
                     name={'password'}
                     extraClass="mb-2"
                 />
             </div>
 
-            <Button type="primary" size="medium">Зарегестрироваться</Button>
+            <Button 
+                type="primary"
+                size="medium"
+                disabled={!emailValue || !passwordValue || !passwordValue}
+                onClick={() => registerUser()}>
+                Зарегестрироваться
+            </Button>
 
-            <div className="mb-4">
-                <span className="text text_type_main-default text_color_inactive">Уже зарегестрированы?</span>
-                <Button type="secondary" size="large" onClick={() => navigateToLogin()}>Войти</Button>
+            <div className="mt-20 mb-4">
+                <span className="text text_type_main-default text_color_inactive">Уже зарегестрированы? </span>
+                <Link to="/login" className={styles.navigateBtn}>Войти</Link>
             </div>
         </section>
     )
