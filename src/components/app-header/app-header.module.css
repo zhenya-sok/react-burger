@@ -18,8 +18,23 @@ header {
     cursor: pointer;
 }
 
-.constructorLink {
-    color: #F2F2F3;  
+.navBtn a {
+    display: flex;
+    align-items: center;
+}
+
+.navBtn__icon {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.activeNavBtn {
+    color: #F2F2F3;
+}
+
+.activeNavBtn svg {
+    fill: #F2F2F3;
 }
 
 .navBtn a {
