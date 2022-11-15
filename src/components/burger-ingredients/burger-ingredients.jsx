@@ -2,27 +2,18 @@ import React, { useState, useContext } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsGroup from '../ingredients-group/ingredients-group';
-import IngredientDetail from '../ingredient-details/ingredient-details';
-import Modal from '../modal/modal';
 import { IngredientDataContext } from '../../services/ingredientDataContext';
-import { setCurrentItem } from '../../services/actions';
+import { setCurrentItem } from '../../services/actions/ingredientsActions';
 import { useDispatch } from 'react-redux';
 import { useInView } from "react-intersection-observer";
 
 const BurgerIngredients = () => {
     const { ingredientsCategories } = useContext(IngredientDataContext);
     const [currentTab, setCurrentTab] = useState("Булки");
-    const [detailsVisible, setDetailsVisible] = useState(false);
     const dispatch = useDispatch();
 
     const showIngredientDetails = (item) => {
         dispatch(setCurrentItem(item));
-        setDetailsVisible(true);
-    };
-
-    const closeIngredientDetails = () => {
-        setDetailsVisible(false);
-        dispatch(setCurrentItem(null));
     };
 
     const [bunsRef, inViewBuns] = useInView({
@@ -87,11 +78,6 @@ const BurgerIngredients = () => {
                     />}
                 </div>
             </section>
-            {detailsVisible && (
-                <Modal closeModal={closeIngredientDetails} titleText="Детали ингредиента">
-                    <IngredientDetail />
-                </Modal>
-            )}
         </>
     )
 }
