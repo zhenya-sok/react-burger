@@ -1,13 +1,14 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import styles from './burger-constructor.module.css';
-import { CurrencyIcon, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { IngredientDataContext } from '../../services/ingredientDataContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSelectIngredient, deleteSelectIngredient, setOrderDetail, updateIngredientsList } from '../../services/actions';
+import { setOrderDetail, updateIngredientsList } from '../../services/actions/ingredientsActions';
 import { useDrop } from 'react-dnd';
 import ConstructorElementWrapper from './constructor-element-wrapper';
+import { useHistory } from 'react-router-dom';
 
 const BurgerConstructor = () => {
     const { selectedIngredients, appSelectedIngredient } = useContext(IngredientDataContext);
@@ -25,14 +26,21 @@ const BurgerConstructor = () => {
         }
     }, 0)
 
+    const isAuth = useSelector((state) => !!state.authReducer.token);
+    const history = useHistory();
+
     const showOrderNumber = () => {
-        const [bunId, ...rest] = selectedIngredients.map((item) => item._id);
+        if (!isAuth) {
+            history.replace({ pathname: `/login` });
+        } else {
+            const [bunId, ...rest] = selectedIngredients.map((item) => item._id);
 
-        dispatch(setOrderDetail({
-            ingredients: [bunId, ...rest, bunId],
-        }))
+            dispatch(setOrderDetail({
+                ingredients: [bunId, ...rest, bunId],
+            }))
 
-        setOrderVisible(true);
+            setOrderVisible(true);
+        }
     };
 
     const closeOrderNumber = () => {
@@ -106,7 +114,7 @@ const BurgerConstructor = () => {
 
     return (
         <section className={`${styles.constructorWrapper} 
-            ${isHover || isSelectedHover ? styles.onHover : ''} pl-4 pt-25`} 
+            ${isHover || isSelectedHover ? styles.onHover : ''} pl-4 pt-25`}
             ref={(el) => { dropTargetRef(el); selectedDropTargetRef(el) }}>
 
             <div className={styles.constructorList}>
@@ -164,7 +172,7 @@ const BurgerConstructor = () => {
                     <span className="text text_type_digits-medium">{orderPrice}</span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" 
+                <Button type="primary" size="large"
                     disabled={!selectedBun}
                     onClick={showOrderNumber}>
                     Оформить заказ
