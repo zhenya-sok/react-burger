@@ -4,9 +4,14 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
 import { useSelectedCountById } from '../../utils/useSelectedCountById';
+import { useLocation, useHistory } from 'react-router-dom';
 
 const Ingredient = ({ ingredientData, showDetails }) => {
-    const count = useSelectedCountById(ingredientData._id)
+
+    const location = useLocation();
+    const history = useHistory();
+
+    const count = useSelectedCountById(ingredientData._id);
 
     const chooseIngredient = (ingredientData) => {
         showDetails(ingredientData);
@@ -20,8 +25,12 @@ const Ingredient = ({ ingredientData, showDetails }) => {
         })
     })
 
+    function navigate(id) {
+        history.push(`/ingredients/${id}`, { background: location });
+    }
+
     return (
-        <div ref={dragRef} style={{ opacity }}>
+        <div ref={dragRef} style={{ opacity }} onClick={() => navigate(ingredientData._id)}>
             <div className={`${styles.ingredientsItem}`} onClick={() => chooseIngredient(ingredientData)}>
                 <img className={`${styles.ingredientsItem__image} pr-4 pl-4`} src={ingredientData.image} alt="изображение ингредиента" />
                 <div className={`${styles.ingredientsItem__price} mt-1 mb-1`}>
@@ -29,9 +38,10 @@ const Ingredient = ({ ingredientData, showDetails }) => {
                     <CurrencyIcon type="primary" />
                 </div>
                 <div className={`${styles.ingredientsItem__title} text text_type_main-default`}>{ingredientData.name}</div>
-                { count > 0 && <Counter count={count} size="default" /> }
+                {count > 0 && <Counter count={count} size="default" />}
             </div>
         </div>
+
     )
 }
 
