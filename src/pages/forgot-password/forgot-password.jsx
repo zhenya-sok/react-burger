@@ -1,34 +1,18 @@
-import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useCallback } from 'react';
+import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import React from 'react';
 import styles from './forgot-password.module.css';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { forgotPassword } from '../../utils/api';
 
 const ForgotPassword = () => {
-    const [emailValue, setEmailValue] = React.useState('')
-    const inputRef = React.useRef(null)
-    const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
-    }
-
-    const [passwordValue, setPasswordValue] = React.useState('');
-    const onChange = e => {
-        setPasswordValue(e.target.value)
-    }
+    const [emailValue, setEmailValue] = React.useState('');
 
     const history = useHistory();
+    const location = useLocation();
 
-    const navigateToLogin = useCallback(
-        () => {
-            history.replace({ pathname: '/login' });
-        },
-        [history]
-    );
-
-    const resetHandle = () => {
-        forgotPassword();
-        history.replace({ pathname: '/reset-password' });
+    const resetHandle = (email) => {
+        forgotPassword(email);
+        history.replace({ pathname: "/reset-password", state: { background: `${location.pathname}` } });
     }
 
     return (
@@ -43,19 +27,22 @@ const ForgotPassword = () => {
                     value={emailValue}
                     name={'name'}
                     error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
                     errorText={'Ошибка'}
                     size={'default'}
-                    extraClass="ml-1"
                 />
             </div>
 
-            <Button type="primary" size="medium" onClick={() => resetHandle()}>Восстановить</Button>
+            <Button
+                type="primary"
+                size="medium"
+                disabled={!emailValue}
+                onClick={() => resetHandle(emailValue)}>
+                Восстановить
+            </Button>
 
-            <div className="mb-4">
-                <span className="text text_type_main-default text_color_inactive">Вспомнили пароль?</span>
-                <Button type="secondary" size="large" onClick={() => navigateToLogin()}>Войти</Button>
+            <div className="mt-20 mb-4">
+                <span className="text text_type_main-default text_color_inactive">Вспомнили пароль? </span>
+                <Link to="/login" className={styles.navigateBtn}>Войти</Link>
             </div>
         </section>
     )
