@@ -3,7 +3,7 @@ import {
     ADD_INGREDIENTS_SUCCESS,
     ADD_INGREDIENTS_ERROR,
 }
-    from '../actions';
+    from '../actions/ingredientsActions';
 
 const initialState = {
     ingredients: [],

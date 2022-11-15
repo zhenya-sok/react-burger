@@ -3,7 +3,7 @@ import {
     SET_ORDER_DETAIL_SUCCESS,
     SET_ORDER_DETAIL_ERROR,
 }
-from '../actions';
+from '../actions/ingredientsActions';
 
 const initialState = {
     orderData: [],
