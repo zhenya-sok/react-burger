@@ -1,16 +1,24 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsGroup from '../ingredients-group/ingredients-group';
-import { IngredientDataContext } from '../../services/ingredientDataContext';
 import { setCurrentItem } from '../../services/actions/ingredientsActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from "react-intersection-observer";
 
 const BurgerIngredients = () => {
-    const { ingredientsCategories } = useContext(IngredientDataContext);
+    const ingredients = useSelector((state) => state.ingredientsReducer.ingredients);
     const [currentTab, setCurrentTab] = useState("Булки");
     const dispatch = useDispatch();
+
+    const ingredientsCategories = ingredients.reduce((all, current) => {
+        const type = current.type
+        if (!Array.isArray(all[type])) {
+            all[type] = []
+        }
+        all[type].push(current)
+        return all
+    }, {})
 
     const showIngredientDetails = (item) => {
         dispatch(setCurrentItem(item));

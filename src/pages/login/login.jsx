@@ -1,12 +1,12 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './login.module.css';
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { login } from '../../services/actions/authActions';
 
 const Login = () => {
-    const [emailValue, setEmailValue] = React.useState('')
+    const [emailValue, setEmailValue] = React.useState('');
 
     const [passwordValue, setPasswordValue] = React.useState('');
 
@@ -14,15 +14,7 @@ const Login = () => {
         setPasswordValue(e.target.value)
     }
 
-    const history = useHistory();
-    const location = useLocation();
     const dispatch = useDispatch();
-
-    const isAuth = useSelector((state) => !!state.authReducer.token);
-    
-    useEffect(() => {
-        isAuth && history.replace({pathname: `${location.state}`});
-    }, [isAuth])
 
     function handleSubmit(e) {
         e.preventDefault();

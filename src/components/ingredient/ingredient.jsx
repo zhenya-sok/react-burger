@@ -3,7 +3,7 @@ import styles from './ingredient.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
-import { useSelectedCountById } from '../../utils/useSelectedCountById';
+import { useSelectedCountById } from '../../utils/hooks/useSelectedCountById';
 import { useLocation, useHistory } from 'react-router-dom';
 
 const Ingredient = ({ ingredientData, showDetails }) => {
