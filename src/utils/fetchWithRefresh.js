@@ -1,10 +1,7 @@
 import Cookies from "js-cookie";
+import { checkResponse } from "./checkResponse";
 
-const BURGER_API = 'https://norma.nomoreparties.space/api';
-
-const checkResponse = (res) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-}
+export const BASE_URL = 'https://norma.nomoreparties.space/api';
 
 const saveTokens = (refreshToken, accessToken) => {
   Cookies.set('accessToken', accessToken);
@@ -12,7 +9,7 @@ const saveTokens = (refreshToken, accessToken) => {
 }
 
 export const refreshTokenRequest = () => {
-  return fetch(`${BURGER_API}/auth/token`, {
+  return fetch(`${BASE_URL}/auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'

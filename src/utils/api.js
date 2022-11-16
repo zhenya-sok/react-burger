@@ -1,9 +1,10 @@
 import {checkResponse} from "../utils/checkResponse";
-import { fetchWithRefresh } from './fetchWithRefresh';
+import { fetchWithRefresh, BASE_URL } from './fetchWithRefresh';
 import Cookies from "js-cookie";
 
-
-const BASE_URL = "https://norma.nomoreparties.space/api"
+function request(url, options) {
+  return fetch(url, options).then(checkResponse)
+}
 
 const ingredientsListUrl = `${BASE_URL}/ingredients`;
 
@@ -57,34 +58,32 @@ export function resetPassword(password, token) {
 const loginUserUrl = `${BASE_URL}/auth/login`;
 
 export function loginUser(userData) {
-  return fetch(loginUserUrl, {
+  return request(loginUserUrl, {
     method: 'POST',
     body: JSON.stringify(userData),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
   })
-    .then(checkResponse)
 }
 
 const registerNewUserUrl = `${BASE_URL}/auth/register`;
 
 export function registerNewUser(userData) {
-  return fetch(registerNewUserUrl, {
+  return request(registerNewUserUrl, {
     method: 'POST',
     body: JSON.stringify(userData),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
   })
-    .then(checkResponse)
 }
 
 const logoutUserUrl = `${BASE_URL}/auth/logout`;
 
 export function logoutUser() {
  
-  return fetch(logoutUserUrl, {
+  return request(logoutUserUrl, {
     method: 'POST',
     body: JSON.stringify({
       token: localStorage.getItem('refreshToken')
@@ -93,7 +92,6 @@ export function logoutUser() {
       'Content-type': 'application/json; charset=UTF-8',
     },
   })
-  .then(checkResponse)
 }
 
 const getUserDataUrl = `${BASE_URL}/auth/user`;
