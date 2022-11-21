@@ -1,7 +1,7 @@
 import {
     SET_CURRENT_ITEM,
 }
-    from '../actions';
+    from '../actions/ingredientsActions';
 
 const initialState = {
     currentItem: null,

@@ -2,7 +2,7 @@ import {
     SELECT_INGREDIENT,
     UPDATE_CONSTRUCTOR_LIST,
 }
-    from '../actions';
+    from '../actions/ingredientsActions';
 
 const initialState = {
     selectedIngredients: [],

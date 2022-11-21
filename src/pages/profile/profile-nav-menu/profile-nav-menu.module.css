@@ -1,0 +1,26 @@
+.profileNavMenu {
+    width: 320px;
+    text-align: start;
+    color: #8585AD;
+}
+
+.profileNavMenu a {
+    text-decoration: none;
+    color: #8585AD;
+}
+
+.profileNavMenu li {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    cursor: pointer;
+}
+
+.profileNavMenu__info {
+    opacity: 40%;
+    line-height: 24px;
+}
+
+.activeNavBtn {
+    color: #F2F2F3!important;
+}

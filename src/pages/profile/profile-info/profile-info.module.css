@@ -1,0 +1,13 @@
+.profileInfoWrapper {
+    display: grid;
+    grid-gap: 24px;
+}
+
+.buttonsBlock {
+    display: flex;
+    justify-content: end;
+}
+
+.cancelBtn {
+  margin-right: -12px;
+}
