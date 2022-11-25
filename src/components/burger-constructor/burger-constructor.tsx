@@ -86,17 +86,17 @@ const BurgerConstructor: FC = () => {
         dispatch(updateIngredientsList(selectedIngredientsCopy));
     }
 
-    const [{ isHover }, dropTargetRef] = useDrop<any, IIngredientData, any>({
+    const [{ isHover }, dropTargetRef] = useDrop({
         accept: 'ingredient',
-        collect: monitor => ({
+        collect: (monitor: DropTargetMonitor) => ({
             isHover: monitor.isOver(),
         }),
-        drop(ingredientData, monitor) {
-            appSelectedIngredient(ingredientData);
+        drop: (ingredientData) => {
+            appSelectedIngredient(ingredientData as IIngredientData);
         }
     });
 
-    const [{ isSelectedHover }, selectedDropTargetRef] = useDrop<any, IIngredientData, any>({
+    const [{ isHover: isSelectedHover }, selectedDropTargetRef] = useDrop({
         accept: 'selected-ingredient',
         collect: monitor => ({
             isHover: monitor.isOver()
@@ -116,10 +116,10 @@ const BurgerConstructor: FC = () => {
             dragInsertBefore.current = insertBeforeDragId
         },
         drop(item) {
-            if (item.ingredientType === 'bun') return
+            if ((item as IDragId).type === 'bun') return
 
             const selectedIngredientsCopy = [...selectedIngredients]
-            const draggingElement = selectedIngredientsCopy.find((ingr) => ingr.dragId === item.dragId)
+            const draggingElement = selectedIngredientsCopy.find((ingr) => ingr.dragId === (item as IDragId).dragId)
             const insertBeforeElementIndex = selectedIngredientsCopy.findIndex((ingr) => ingr.dragId === dragInsertBefore.current)
             const insertBeforeElement = selectedIngredientsCopy[insertBeforeElementIndex]
 
@@ -172,7 +172,7 @@ const BurgerConstructor: FC = () => {
                         if (item.type !== "bun")
                             return (
                                 <ConstructorElementWrapper
-                                    type={item.type}
+                                    type={undefined}
                                     key={item.dragId}
                                     dragId={item.dragId}
                                     handleClose={() => deleteSelectedIngredient(item)}
