@@ -86,17 +86,17 @@ const BurgerConstructor: FC = () => {
         dispatch(updateIngredientsList(selectedIngredientsCopy));
     }
 
-    const [{ isHover }, dropTargetRef] = useDrop({
+    const [{ isHover }, dropTargetRef] = useDrop<IIngredientData, void, {isHover: boolean}>({
         accept: 'ingredient',
         collect: (monitor: DropTargetMonitor) => ({
             isHover: monitor.isOver(),
         }),
         drop: (ingredientData) => {
-            appSelectedIngredient(ingredientData as IIngredientData);
+            appSelectedIngredient(ingredientData);
         }
     });
 
-    const [{ isHover: isSelectedHover }, selectedDropTargetRef] = useDrop({
+    const [{ isHover: isSelectedHover }, selectedDropTargetRef] = useDrop<IDragId, void, {isHover: boolean}>({
         accept: 'selected-ingredient',
         collect: monitor => ({
             isHover: monitor.isOver()
@@ -117,10 +117,10 @@ const BurgerConstructor: FC = () => {
         },
         drop(item) {
             // Откуда тут берется ingredientType? В итеме нет такого ключа.
-            if ((item as IDragId).type === 'bun') return
+            if (item.type === 'bun') return
 
             const selectedIngredientsCopy = [...selectedIngredients]
-            const draggingElement = selectedIngredientsCopy.find((ingr) => ingr.dragId === (item as IDragId).dragId)
+            const draggingElement = selectedIngredientsCopy.find((ingr) => ingr.dragId === item.dragId)
             const insertBeforeElementIndex = selectedIngredientsCopy.findIndex((ingr) => ingr.dragId === dragInsertBefore.current)
             const insertBeforeElement = selectedIngredientsCopy[insertBeforeElementIndex]
 
