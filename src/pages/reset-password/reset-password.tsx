@@ -26,7 +26,6 @@ const ResetPassword = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
-                        extraClass="ml-1"
                     />
                 </div>
 
@@ -40,7 +39,6 @@ const ResetPassword = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
-                        extraClass="ml-1"
                     />
                 </div>
 

@@ -1,16 +1,16 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './forgot-password.module.css';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { forgotPassword } from '../../utils/api';
 
-const ForgotPassword = () => {
+const ForgotPassword: FC = () => {
     const [emailValue, setEmailValue] = React.useState('');
 
     const history = useHistory();
     const location = useLocation();
 
-    const resetHandle = (email) => {
+    const resetHandle = (email: string) => {
         forgotPassword(email);
         history.replace({ pathname: "/reset-password", state: { background: `${location.pathname}` } });
     }
@@ -33,6 +33,7 @@ const ForgotPassword = () => {
             </div>
 
             <Button
+                htmlType="button"
                 type="primary"
                 size="medium"
                 disabled={!emailValue}

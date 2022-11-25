@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './profile.module.css';
 import { Switch, Route } from 'react-router-dom';
 import ProfileNavMenu from './profile-nav-menu/profile-nav-menu';
-import ProfileInfo from '../profile/profile-info/profile-info';
-import OrderFeed from '../profile/order-feed/order-feed';
+import ProfileInfo from './profile-info/profile-info';
+import OrderFeed from './order-feed/order-feed';
 
-const Profile = () => {
+const Profile: FC = () => {
 
     return (
         <section className={`${styles.profileWrapper} text text_type_main-medium`}>

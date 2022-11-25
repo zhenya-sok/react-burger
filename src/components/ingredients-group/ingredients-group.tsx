@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { FC, useRef } from 'react';
 import styles from './ingredients-group.module.css';
 import Ingredient from '../ingredient/ingredient';
-import PropTypes from 'prop-types';
-import {ingredientPropTypes} from '../../utils/ingredientPropType';
+import { IIngredientData } from '../../types/types';
 
-const IngredientsGroup = React.forwardRef(({title, ingredients, showDetails, titleId}, groupRef) => {
+interface IIngredientsGroupProps {
+    title: string;
+    ingredients: IIngredientData[];
+    showDetails: () => void;
+    titleId: string;
+    groupRef: (node?: Element | null | undefined) => void
+}
 
+const IngredientsGroup: FC<IIngredientsGroupProps> = React.forwardRef(({title, ingredients, showDetails, titleId}, groupRef) => {
+    // groupRef = useRef<HTMLDivElement>(null)
+    
     return (
         <>
             <h3 className="text text_type_main-medium mb-6" id={titleId}>
@@ -26,10 +34,5 @@ const IngredientsGroup = React.forwardRef(({title, ingredients, showDetails, tit
         </>
     )
 });
-
-IngredientsGroup.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
-    showDetails: PropTypes.func.isRequired,
-}
 
 export default IngredientsGroup;

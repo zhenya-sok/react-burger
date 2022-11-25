@@ -13,11 +13,12 @@ const Register = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const onPasswordChange = e => {
+    const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPasswordValue(e.target.value)
     }
 
     const registerUser = () => {
+        // @ts-ignore
         dispatch(register({
             email: emailValue,
             password: passwordValue,
@@ -60,7 +61,6 @@ const Register = () => {
                     onChange={onPasswordChange}
                     value={passwordValue}
                     name={'password'}
-                    extraClass="mb-2"
                 />
             </div>
 

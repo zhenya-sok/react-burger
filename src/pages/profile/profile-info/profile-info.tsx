@@ -1,12 +1,13 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import styles from './profile-info.module.css';
 import { getUser, updateUser } from '../../../services/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const ProfileInfo = () => {
+const ProfileInfo: FC = () => {
 
     const dispatch = useDispatch();
+    // @ts-ignore
     const user = useSelector((state) => state.authReducer.user);
 
     const [nameValue, setNameValue] = React.useState('');
@@ -14,6 +15,7 @@ const ProfileInfo = () => {
     const [passwordValue, setPasswordValue] = React.useState('');
 
     useEffect(() => {
+    // @ts-ignore
         dispatch(getUser());
     }, [dispatch])
 
@@ -29,6 +31,7 @@ const ProfileInfo = () => {
     }
 
     const saveNewUserData = () => {
+        // @ts-ignore
         dispatch(updateUser({
             name: nameValue,
             email: emailValue
@@ -76,7 +79,7 @@ const ProfileInfo = () => {
             {((user && user.name) !== nameValue || (user && user.email) !== emailValue) &&
                 <div className={styles.buttonsBlock}>
                     <div className={styles.cancelBtn}>
-                        <Button type="secondary" size="medium" onClick={() => cancelСhanges()}>
+                        <Button htmlType="button" type="secondary" size="medium" onClick={() => cancelСhanges()}>
                             Отмена
                         </Button>
                     </div>

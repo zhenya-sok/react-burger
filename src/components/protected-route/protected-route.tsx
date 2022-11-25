@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect, useLocation } from 'react-router-dom';
 
-const ProtectedRoute = ({ onlyForAuth, children, ...rest }) => {
+interface IProtectedRouteProps {
+    onlyForAuth?: boolean;
+    children: ReactNode;
+    path: string;
+    exact?: boolean;
+}
+
+const ProtectedRoute: FC<IProtectedRouteProps>  = ({ onlyForAuth, children, ...rest }) => {
+    // @ts-ignore
     const isAuth = useSelector((state) => !!state.authReducer.token);
     const location = useLocation();
 

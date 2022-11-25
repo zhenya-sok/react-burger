@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './order-feed.module.css';
 
-const OrderFeed = () => {
+const OrderFeed: FC = () => {
 
     return (
         <div>

@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './ingredient.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
 import { useSelectedCountById } from '../../utils/hooks/useSelectedCountById';
 import { useLocation, useHistory } from 'react-router-dom';
+import { IIngredientData } from '../../types/types';
 
-const Ingredient = ({ ingredientData, showDetails }) => {
+interface IIngredientProps {
+    ingredientData: IIngredientData;
+    showDetails: (ingredientData: IIngredientData) => void;
+}
+
+const Ingredient: FC<IIngredientProps> = ({ ingredientData, showDetails }) => {
 
     const location = useLocation();
     const history = useHistory();
 
     const count = useSelectedCountById(ingredientData._id);
 
-    const chooseIngredient = (ingredientData) => {
+    const chooseIngredient = (ingredientData: IIngredientData) => {
         showDetails(ingredientData);
     }
 
@@ -25,7 +30,7 @@ const Ingredient = ({ ingredientData, showDetails }) => {
         })
     })
 
-    function navigate(id) {
+    function navigate(id: string) {
         history.push(`/ingredients/${id}`, { background: location });
     }
 
@@ -43,11 +48,6 @@ const Ingredient = ({ ingredientData, showDetails }) => {
         </div>
 
     )
-}
-
-Ingredient.propTypes = {
-    ingredientData: PropTypes.object.isRequired,
-    showDetails: PropTypes.func.isRequired,
 }
 
 export default Ingredient;

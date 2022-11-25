@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './app-header.module.css';
 import { Logo, ProfileIcon, BurgerIcon, ListIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, Link } from 'react-router-dom';
 
-const AppHeader = () => {
+const AppHeader: FC = () => {
     return (
         <header className="p-4 text text_type_main-default">
             <nav className={styles.navWrapper}>

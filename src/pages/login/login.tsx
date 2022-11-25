@@ -1,23 +1,23 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './login.module.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../services/actions/authActions';
 
-const Login = () => {
+const Login: FC = () => {
     const [emailValue, setEmailValue] = React.useState('');
-
     const [passwordValue, setPasswordValue] = React.useState('');
 
-    const onPasswordChange = e => {
+    const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPasswordValue(e.target.value)
     }
 
     const dispatch = useDispatch();
 
-    function handleSubmit(e) {
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => { 
         e.preventDefault();
+        // @ts-ignore
         dispatch(login({
             email: emailValue,
             password: passwordValue
@@ -39,7 +39,6 @@ const Login = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
-                        extraClass="ml-1"
                     />
                 </div>
 
@@ -48,7 +47,6 @@ const Login = () => {
                         onChange={onPasswordChange}
                         value={passwordValue}
                         name={'password'}
-                        extraClass="mb-2"
                     />
                 </div>
 
