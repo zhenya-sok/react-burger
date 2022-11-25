@@ -97,26 +97,29 @@ export function logoutUser() {
 const getUserDataUrl = `${BASE_URL}/auth/user`;
 
 export function getUserData() {
+  const accessToken = Cookies.get("accessToken");
 
-  return fetchWithRefresh(getUserDataUrl, {
-    method: 'GET',
-    headers: {
-      authorization: Cookies.get("accessToken")
-    },
-  })
+  if (typeof accessToken === 'string') {
+    return fetchWithRefresh(getUserDataUrl, {
+      method: 'GET',
+      headers: {
+        authorization: accessToken
+      },
+    })
+  }
 }
 
 export function setNewUserData(userData: object []) {
+  const accessToken = Cookies.get("accessToken");
 
-  return fetchWithRefresh(getUserDataUrl, {
-    method: 'PATCH',
-    // if (options && options.headers) {
-    //   (options.headers as Headers).set("Authorization", accessToken);
-    // }
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-      authorization: Cookies.get("accessToken")
-    },
-    body: JSON.stringify(userData),
-  })
+  if (typeof accessToken === 'string') {
+    return fetchWithRefresh(getUserDataUrl, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        authorization: accessToken
+      },
+      body: JSON.stringify(userData),
+    })
+  }
 }

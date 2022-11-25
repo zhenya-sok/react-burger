@@ -12,10 +12,10 @@ interface IProtectedRouteProps {
 const ProtectedRoute: FC<IProtectedRouteProps>  = ({ onlyForAuth, children, ...rest }) => {
     // @ts-ignore
     const isAuth = useSelector((state) => !!state.authReducer.token);
-    const location = useLocation();
+    const location = useLocation<{from: { pathname: string }}>();
 
     if (!onlyForAuth && isAuth) {
-        const { from } = location.state || { from: { pathname: "/" } };
+        const from = location?.state?.from || { pathname: "/" }
 
         return (
             <Route {...rest}>

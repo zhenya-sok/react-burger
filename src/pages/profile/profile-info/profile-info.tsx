@@ -83,7 +83,7 @@ const ProfileInfo: FC = () => {
                             Отмена
                         </Button>
                     </div>
-                    <Button type="primary" size="medium" onClick={() => saveNewUserData()}>
+                    <Button htmlType="button" type="primary" size="medium" onClick={() => saveNewUserData()}>
                         Сохранить
                     </Button>
                 </div>

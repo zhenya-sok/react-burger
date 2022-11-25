@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React from 'react';
 import styles from './ingredients-group.module.css';
 import Ingredient from '../ingredient/ingredient';
 import { IIngredientData } from '../../types/types';
@@ -6,13 +6,14 @@ import { IIngredientData } from '../../types/types';
 interface IIngredientsGroupProps {
     title: string;
     ingredients: IIngredientData[];
-    showDetails: () => void;
+    showDetails: (item: IIngredientData) => void;
     titleId: string;
-    groupRef: (node?: Element | null | undefined) => void
+    ref: (node?: Element | null | undefined) => void
 }
 
-const IngredientsGroup: FC<IIngredientsGroupProps> = React.forwardRef(({title, ingredients, showDetails, titleId}, groupRef) => {
-    // groupRef = useRef<HTMLDivElement>(null)
+type Ref = HTMLDivElement | null;
+
+const IngredientsGroup = React.forwardRef<Ref, IIngredientsGroupProps>(({title, ingredients, showDetails, titleId}, groupRef) => {
     
     return (
         <>
