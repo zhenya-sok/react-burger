@@ -43,6 +43,7 @@ const ResetPassword = () => {
                 </div>
 
                 <Button
+                    htmlType="button"
                     type="primary"
                     size="medium"
                     disabled={!passwordValue || !textValue}

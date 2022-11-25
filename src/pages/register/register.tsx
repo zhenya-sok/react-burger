@@ -65,6 +65,7 @@ const Register = () => {
             </div>
 
             <Button 
+                htmlType="button"
                 type="primary"
                 size="medium"
                 disabled={!emailValue || !passwordValue || !passwordValue}

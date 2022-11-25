@@ -7,9 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from "react-intersection-observer";
 import { IIngredientData } from '../../types/types';
 
-interface IType {
-    type: "bun" | "main" | "sauce";
-}
+// interface IType {
+//     type: "bun" | "main" | "sauce";
+// }
+
+// Мне с типом как-то удобнее, чем с интерфейсом
+type IType =  "bun" | "main" | "sauce";
 
 const BurgerIngredients: FC = () => {
     // @ts-ignore
@@ -17,12 +20,12 @@ const BurgerIngredients: FC = () => {
     const [currentTab, setCurrentTab] = useState("Булки");
     const dispatch = useDispatch();
 
-    const ingredientsCategories = ingredients.reduce((all: object[], current: IIngredientData) => {
+    const ingredientsCategories = ingredients.reduce((all: Partial<Record<IType, IIngredientData[]>>, current: IIngredientData) => {
         const type = current.type
         if (!Array.isArray(all[type])) {
             all[type] = []
         }
-        all[type].push(current)
+        (all[type] as IIngredientData[]).push(current)
         return all
     }, {})
 

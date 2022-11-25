@@ -9,6 +9,7 @@ import { IIngredientData } from '../../types/types';
 interface IIngredientProps {
     ingredientData: IIngredientData;
     showDetails: (ingredientData: IIngredientData) => void;
+    onClick: (item: IIngredientData) => void
 }
 
 const Ingredient: FC<IIngredientProps> = ({ ingredientData, showDetails }) => {

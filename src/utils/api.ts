@@ -97,13 +97,18 @@ export function logoutUser() {
 const getUserDataUrl = `${BASE_URL}/auth/user`;
 
 export function getUserData() {
+  // Cookies.get("accessToken") может вернуть как undefined, так и строку, а headers имеют тип Record<string, string>
+  // Поэтому мы должны отсеять undefined
+  const accessToken = Cookies.get("accessToken");
 
-  return fetchWithRefresh(getUserDataUrl, {
-    method: 'GET',
-    headers: {
-      authorization: Cookies.get("accessToken")
-    },
-  })
+  if (typeof accessToken === 'string') {
+    return fetchWithRefresh(getUserDataUrl, {
+      method: 'GET',
+      headers: {
+        authorization: accessToken
+      },
+    })
+  }
 }
 
 export function setNewUserData(userData: object []) {
@@ -113,9 +118,12 @@ export function setNewUserData(userData: object []) {
     // if (options && options.headers) {
     //   (options.headers as Headers).set("Authorization", accessToken);
     // }
+
+    // Тут аналогично getUserData
     headers: {
       "Content-Type": "application/json;charset=utf-8",
-      authorization: Cookies.get("accessToken")
+      // TODO: убрать `as string` и переписать как в getUserData
+      authorization: Cookies.get("accessToken") as string
     },
     body: JSON.stringify(userData),
   })
