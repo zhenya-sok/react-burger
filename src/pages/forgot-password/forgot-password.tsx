@@ -19,27 +19,29 @@ const ForgotPassword: FC = () => {
         <section className={styles.forgotPasswordWrapper}>
             <h1>Восстановление пароля</h1>
 
-            <div className={`${styles.forgotPasswordInput} mt-6 mb-6`}>
-                <Input
-                    type={'email'}
-                    placeholder={'Укажите e-mail'}
-                    onChange={e => setEmailValue(e.target.value)}
-                    value={emailValue}
-                    name={'name'}
-                    error={false}
-                    errorText={'Ошибка'}
-                    size={'default'}
-                />
-            </div>
+            <form onSubmit={() => resetHandle(emailValue)}>
+                <div className={`${styles.forgotPasswordInput} mt-6 mb-6`}>
+                    <Input
+                        type={'email'}
+                        placeholder={'Укажите e-mail'}
+                        onChange={e => setEmailValue(e.target.value)}
+                        value={emailValue}
+                        name={'name'}
+                        error={false}
+                        errorText={'Ошибка'}
+                        size={'default'}
+                    />
+                </div>
 
-            <Button
-                htmlType="button"
-                type="primary"
-                size="medium"
-                disabled={!emailValue}
-                onClick={() => resetHandle(emailValue)}>
-                Восстановить
-            </Button>
+                <Button
+                    htmlType="submit"
+                    type="primary"
+                    size="medium"
+                    disabled={!emailValue}
+                >
+                    Восстановить
+                </Button>
+            </form>
 
             <div className="mt-20 mb-4">
                 <span className="text text_type_main-default text_color_inactive">Вспомнили пароль? </span>

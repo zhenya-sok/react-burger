@@ -30,7 +30,8 @@ const ProfileInfo: FC = () => {
         setEmailValue(user.email);
     }
 
-    const saveNewUserData = () => {
+    const saveNewUserData: React.FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
         // @ts-ignore
         dispatch(updateUser({
             name: nameValue,
@@ -39,7 +40,7 @@ const ProfileInfo: FC = () => {
     }
 
     return (
-        <section className={styles.profileInfoWrapper}>
+        <form onSubmit={saveNewUserData} className={styles.profileInfoWrapper}>
             <Input
                 type={'text'}
                 placeholder={'Имя'}
@@ -79,17 +80,16 @@ const ProfileInfo: FC = () => {
             {((user && user.name) !== nameValue || (user && user.email) !== emailValue) &&
                 <div className={styles.buttonsBlock}>
                     <div className={styles.cancelBtn}>
-                        <Button htmlType="button" type="secondary" size="medium" onClick={() => cancelСhanges()}>
+                        <Button htmlType="reset" type="secondary" size="medium" onClick={() => cancelСhanges()}>
                             Отмена
                         </Button>
                     </div>
-                    <Button htmlType="button" type="primary" size="medium" onClick={() => saveNewUserData()}>
+                    <Button htmlType="submit" type="primary" size="medium">
                         Сохранить
                     </Button>
                 </div>
             }
-
-        </section>
+        </form>
     )
 }
 

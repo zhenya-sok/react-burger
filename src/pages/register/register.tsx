@@ -30,48 +30,51 @@ const Register = () => {
     return (
         <section className={styles.registerWrapper}>
             <h1>Регистрация</h1>
-            <div className={`${styles.registerInput} mt-6 mb-6`}>
-                <Input
-                    type={'text'}
-                    placeholder={'Имя'}
-                    onChange={e => setNameValue(e.target.value)}
-                    value={nameValue}
-                    name={'name'}
-                    error={false}
-                    errorText={'Ошибка'}
-                    size={'default'}
-                />
-            </div>
 
-            <div className={`${styles.registerInput} mb-6`}>
-                <Input
-                    type={'email'}
-                    placeholder={'E-mail'}
-                    onChange={e => setEmailValue(e.target.value)}
-                    value={emailValue}
-                    name={'name'}
-                    error={false}
-                    errorText={'Ошибка'}
-                    size={'default'}
-                />
-            </div>
+            <form onSubmit={() => registerUser()}>
+                <div className={`${styles.registerInput} mt-6 mb-6`}>
+                    <Input
+                        type={'text'}
+                        placeholder={'Имя'}
+                        onChange={e => setNameValue(e.target.value)}
+                        value={nameValue}
+                        name={'name'}
+                        error={false}
+                        errorText={'Ошибка'}
+                        size={'default'}
+                    />
+                </div>
 
-            <div className={`${styles.registerInput} mb-6`}>
-                <PasswordInput
-                    onChange={onPasswordChange}
-                    value={passwordValue}
-                    name={'password'}
-                />
-            </div>
+                <div className={`${styles.registerInput} mb-6`}>
+                    <Input
+                        type={'email'}
+                        placeholder={'E-mail'}
+                        onChange={e => setEmailValue(e.target.value)}
+                        value={emailValue}
+                        name={'name'}
+                        error={false}
+                        errorText={'Ошибка'}
+                        size={'default'}
+                    />
+                </div>
 
-            <Button
-                htmlType="button"
-                type="primary"
-                size="medium"
-                disabled={!emailValue || !passwordValue || !passwordValue}
-                onClick={() => registerUser()}>
-                Зарегестрироваться
-            </Button>
+                <div className={`${styles.registerInput} mb-6`}>
+                    <PasswordInput
+                        onChange={onPasswordChange}
+                        value={passwordValue}
+                        name={'password'}
+                    />
+                </div>
+
+                <Button
+                    htmlType="submit"
+                    type="primary"
+                    size="medium"
+                    disabled={!emailValue || !passwordValue || !passwordValue}
+                >
+                    Зарегестрироваться
+                </Button>
+            </form>
 
             <div className="mt-20 mb-4">
                 <span className="text text_type_main-default text_color_inactive">Уже зарегестрированы? </span>

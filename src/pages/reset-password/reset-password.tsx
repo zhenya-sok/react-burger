@@ -15,41 +15,43 @@ const ResetPassword = () => {
             <section className={styles.resetPasswordWrapper}>
                 <h1>Восстановление пароля</h1>
 
-                <div className={`${styles.loginInput} mt-6 mb-6`}>
-                    <Input
-                        type={'password'}
-                        placeholder={'Введите новый пароль'}
-                        onChange={e => setPasswordValue(e.target.value)}
-                        icon={'HideIcon'}
-                        value={passwordValue}
-                        name={'name'}
-                        error={false}
-                        errorText={'Ошибка'}
-                        size={'default'}
-                    />
-                </div>
+                <form onSubmit={() => resetPassword(passwordValue, textValue)}>
+                    <div className={`${styles.loginInput} mt-6 mb-6`}>
+                        <Input
+                            type={'password'}
+                            placeholder={'Введите новый пароль'}
+                            onChange={e => setPasswordValue(e.target.value)}
+                            icon={'HideIcon'}
+                            value={passwordValue}
+                            name={'name'}
+                            error={false}
+                            errorText={'Ошибка'}
+                            size={'default'}
+                        />
+                    </div>
 
-                <div className={`${styles.resetPasswordInput} mb-6`}>
-                    <Input
-                        type={'text'}
-                        placeholder={'Введите код из письма'}
-                        onChange={e => setTextValue(e.target.value)}
-                        value={textValue}
-                        name={'name'}
-                        error={false}
-                        errorText={'Ошибка'}
-                        size={'default'}
-                    />
-                </div>
+                    <div className={`${styles.resetPasswordInput} mb-6`}>
+                        <Input
+                            type={'text'}
+                            placeholder={'Введите код из письма'}
+                            onChange={e => setTextValue(e.target.value)}
+                            value={textValue}
+                            name={'name'}
+                            error={false}
+                            errorText={'Ошибка'}
+                            size={'default'}
+                        />
+                    </div>
 
-                <Button
-                    htmlType="button"
-                    type="primary"
-                    size="medium"
-                    disabled={!passwordValue || !textValue}
-                    onClick={() => resetPassword(passwordValue, textValue)}>
-                    Сохранить
-                </Button>
+                    <Button
+                        htmlType="submit"
+                        type="primary"
+                        size="medium"
+                        disabled={!passwordValue || !textValue}
+                    >
+                        Сохранить
+                    </Button>
+                </form>
 
                 <div className="mt-20 mb-4">
                     <span className="text text_type_main-default text_color_inactive">Вспомнили пароль? </span>

@@ -14,7 +14,7 @@ const Modal: FC<IModalProps> = ({children, closeModal, titleText}) => {
     const modalElement = document.querySelector("#modal") as HTMLElement;
 
     React.useEffect(() => {
-        function actionEsc(e: any) {
+        function actionEsc(e: KeyboardEvent) {
             e.key === "Escape" && closeModal();
         };
 
