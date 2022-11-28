@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsGroup from '../ingredients-group/ingredients-group';
 import { setCurrentItem } from '../../services/actions/ingredientsActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from "react-intersection-observer";
+import { IIngredientData } from '../../types/types';
 
-const BurgerIngredients = () => {
+type IType = "bun" | "main" | "sauce";
+
+const BurgerIngredients: FC = () => {
+    // @ts-ignore
     const ingredients = useSelector((state) => state.ingredientsReducer.ingredients);
     const [currentTab, setCurrentTab] = useState("Булки");
     const dispatch = useDispatch();
 
-    const ingredientsCategories = ingredients.reduce((all, current) => {
+    const ingredientsCategories = ingredients.reduce((all: Partial<Record<IType, IIngredientData[]>>, current: IIngredientData) => {
         const type = current.type
         if (!Array.isArray(all[type])) {
             all[type] = []
         }
-        all[type].push(current)
+        (all[type] as IIngredientData[]).push(current)
         return all
     }, {})
 
-    const showIngredientDetails = (item) => {
+    const showIngredientDetails = (item: IIngredientData) => {
         dispatch(setCurrentItem(item));
     };
 
@@ -45,7 +49,7 @@ const BurgerIngredients = () => {
         }
     }, [inViewBuns, inViewSauces, inViewFilling]);
 
-    const onTabClick = (group) => {
+    const onTabClick = (group: string) => {
         setCurrentTab(group);
         const groupTitle = document.getElementById(group);
         if (groupTitle) groupTitle.scrollIntoView({ behavior: "smooth" });

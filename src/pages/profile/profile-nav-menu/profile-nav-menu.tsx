@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './profile-nav-menu.module.css';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../services/actions/authActions';
 import { useLocation } from 'react-router-dom';
 
-const ProfileNavMenu = () => {
+const ProfileNavMenu: FC = () => {
 
     const dispatch = useDispatch();
     const location = useLocation();
 
     const logoutUser = () => {
+        // @ts-ignore
         dispatch(logout());
     }
 

@@ -1,12 +1,13 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import styles from './profile-info.module.css';
 import { getUser, updateUser } from '../../../services/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const ProfileInfo = () => {
+const ProfileInfo: FC = () => {
 
     const dispatch = useDispatch();
+    // @ts-ignore
     const user = useSelector((state) => state.authReducer.user);
 
     const [nameValue, setNameValue] = React.useState('');
@@ -14,6 +15,7 @@ const ProfileInfo = () => {
     const [passwordValue, setPasswordValue] = React.useState('');
 
     useEffect(() => {
+    // @ts-ignore
         dispatch(getUser());
     }, [dispatch])
 
@@ -28,7 +30,9 @@ const ProfileInfo = () => {
         setEmailValue(user.email);
     }
 
-    const saveNewUserData = () => {
+    const saveNewUserData: React.FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
+        // @ts-ignore
         dispatch(updateUser({
             name: nameValue,
             email: emailValue
@@ -36,7 +40,7 @@ const ProfileInfo = () => {
     }
 
     return (
-        <section className={styles.profileInfoWrapper}>
+        <form onSubmit={saveNewUserData} className={styles.profileInfoWrapper}>
             <Input
                 type={'text'}
                 placeholder={'Имя'}
@@ -76,17 +80,16 @@ const ProfileInfo = () => {
             {((user && user.name) !== nameValue || (user && user.email) !== emailValue) &&
                 <div className={styles.buttonsBlock}>
                     <div className={styles.cancelBtn}>
-                        <Button type="secondary" size="medium" onClick={() => cancelСhanges()}>
+                        <Button htmlType="reset" type="secondary" size="medium" onClick={() => cancelСhanges()}>
                             Отмена
                         </Button>
                     </div>
-                    <Button type="primary" size="medium" onClick={() => saveNewUserData()}>
+                    <Button htmlType="submit" type="primary" size="medium">
                         Сохранить
                     </Button>
                 </div>
             }
-
-        </section>
+        </form>
     )
 }
 

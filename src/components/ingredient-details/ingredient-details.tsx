@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './ingredient-details.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-const IngredientDetail = () => {
+interface IParams {
+    id: string;
+};
 
-    const { id } = useParams();
+const IngredientDetail: FC = () => {
+
+    const { id } = useParams<IParams>();
+    // @ts-ignore
     const ingredientInfo = useSelector((state) => state.ingredientsReducer.ingredients.filter((e) => e._id === id))[0];
 
     return (ingredientInfo && (

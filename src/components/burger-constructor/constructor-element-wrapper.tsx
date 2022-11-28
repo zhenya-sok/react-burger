@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
 import styles from './burger-constructor.module.css';
-import PropTypes from 'prop-types';
 
-export default function ConstructorElementWrapper({ type, isLocked, text, price, thumbnail, dragId, ingredientType, handleClose, draggable = false }) {
+type IConstructorElementWrapperProps = {
+    type: "top" | "bottom" | undefined,
+    isLocked: boolean,
+    text: string,
+    price: number,
+    thumbnail: string,
+    dragId: string,
+    ingredientType: "bun" | "main" | "sauce",
+    handleClose?: () => void,
+    draggable?: boolean,
+}
+
+const ConstructorElementWrapper: FC<IConstructorElementWrapperProps> = ({ type, isLocked, text, price, thumbnail, dragId, ingredientType, handleClose, draggable = false }) => {
     const [{ opacity }, dragRef] = useDrag({
         type: 'selected-ingredient',
         item: { type, isLocked, text, price, thumbnail, draggable, dragId, ingredientType },
@@ -15,7 +26,7 @@ export default function ConstructorElementWrapper({ type, isLocked, text, price,
 
     return (
         <div className={`${styles.ingredientItem} mb-4`} ref={dragRef} data-drag-id={dragId}>
-            {draggable && <DragIcon />}
+            {draggable && <DragIcon type="primary" />}
             <ConstructorElement
                 type={type}
                 isLocked={isLocked}
@@ -28,14 +39,4 @@ export default function ConstructorElementWrapper({ type, isLocked, text, price,
     )
 }
 
-ConstructorElementWrapper.propTypes = {
-    ingredientType: PropTypes.oneOf(["bun", "main", "sauce"]).isRequired,
-    isLocked: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    dragId: PropTypes.string.isRequired,
-    type: PropTypes.string,
-    handleClose: PropTypes.func,
-    draggable: PropTypes.bool,
-}
+export default ConstructorElementWrapper;

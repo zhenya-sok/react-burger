@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import styles from './app.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import AppHeader from '../app-header/app-header';
@@ -19,17 +19,23 @@ import ProtectedRoute from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientDetail from '../ingredient-details/ingredient-details';
 import NotFound404 from '../../pages/not-found-404/not-found-404';
+import { Location } from 'history';
 
-function App() {
+type TLocationState = {
+  background: Location;
+}
+
+const App: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // @ts-ignore
     dispatch(addIngredients());
     dispatch(checkAuthSession());
   }, [dispatch])
 
   const ModalSwitch = () => {
-    const location = useLocation();
+    const location = useLocation<TLocationState>();
     const history = useHistory();
     const background = location.state && location.state.background;
 
@@ -51,7 +57,7 @@ function App() {
             </main>
           </Route>
 
-          <ProtectedRoute path="/login"  exact>
+          <ProtectedRoute path="/login" exact>
             <Login />
           </ProtectedRoute>
 

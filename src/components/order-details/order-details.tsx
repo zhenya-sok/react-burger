@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './order-details.module.css';
 import orderIsAccepted from '../../images/orderIsAccepted.svg';
-import PropTypes from 'prop-types';
 
-const OrderDetails = ({bookingNumber}) => {
+interface IOrderDetailsProps {
+    bookingNumber: number;
+}
+
+const OrderDetails: FC<IOrderDetailsProps> = ({bookingNumber}) => {
 
     return(
         <div className={styles.wrapper}>
@@ -14,10 +17,6 @@ const OrderDetails = ({bookingNumber}) => {
             <p className="text text_type_main-default text_color_inactive mb-15">Дождитесь готовности на орбитальной станции</p>
         </div>
     )
-}
-
-OrderDetails.propTypes = {
-    bookingNumber: PropTypes.number.isRequired,
 }
 
 export default OrderDetails;
