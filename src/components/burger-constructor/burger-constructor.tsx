@@ -4,12 +4,12 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSelectIngredient, setOrderDetail, updateIngredientsList } from '../../services/actions/ingredientsActions';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import ConstructorElementWrapper from './constructor-element-wrapper';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import { IIngredientData } from '../../types/types';
+import { addSelectIngredient, updateIngredientsList } from '../../services/actions/constructorActions';
 
 interface IDragId extends IIngredientData {
     dragId: string;

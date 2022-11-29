@@ -4,8 +4,8 @@ import '@ya.praktikum/react-developer-burger-ui-components';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { useDispatch } from 'react-redux';
-import { addIngredients, setCurrentItem } from '../../services/actions/ingredientsActions';
+import { useDispatch } from '../../utils/hooks/hooks';
+import { setCurrentItem } from '../../services/actions/modalIngredientActions';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BrowserRouter, Switch, Route, useHistory, useLocation } from 'react-router-dom';
@@ -20,6 +20,7 @@ import Modal from '../modal/modal';
 import IngredientDetail from '../ingredient-details/ingredient-details';
 import NotFound404 from '../../pages/not-found-404/not-found-404';
 import { Location } from 'history';
+import { addIngredients } from '../../services/actions/ingredientsActions';
 
 type TLocationState = {
   background: Location;
@@ -33,7 +34,7 @@ const App: FC = () => {
     dispatch(addIngredients());
     dispatch(checkAuthSession());
   }, [dispatch])
-
+  
   const ModalSwitch = () => {
     const location = useLocation<TLocationState>();
     const history = useHistory();

@@ -2,15 +2,14 @@ import React, { FC, useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsGroup from '../ingredients-group/ingredients-group';
-import { setCurrentItem } from '../../services/actions/ingredientsActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks/hooks';
 import { useInView } from "react-intersection-observer";
 import { IIngredientData } from '../../types/types';
+import { setCurrentItem } from '../../services/actions/modalIngredientActions';
 
 type IType = "bun" | "main" | "sauce";
 
 const BurgerIngredients: FC = () => {
-    // @ts-ignore
     const ingredients = useSelector((state) => state.ingredientsReducer.ingredients);
     const [currentTab, setCurrentTab] = useState("Булки");
     const dispatch = useDispatch();

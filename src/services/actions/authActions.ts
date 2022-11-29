@@ -1,28 +1,87 @@
 import { registerNewUser, loginUser, logoutUser, getUserData, setNewUserData } from '../../utils/api';
 import Cookies from 'js-cookie';
+import { IUserData, IUserLogin } from '../../types/types';
+import {
+    REGISTER_USER_REQUEST,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_ERROR,
+    LOGIN_REQUEST,
+    LOGIN_SUCCESS,
+    LOGIN_ERROR,
+    CHECK_AUTH_SESSION,
+    LOGOUT,
+    GET_USER,
+    UPDATE_USER
+} from '../constants';
 
-export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
-export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
-export const REGISTER_USER_ERROR = 'REGISTER_USER_ERROR';
-
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'LOGIN_ERROR';
-
-export const CHECK_AUTH_SESSION= 'CHECK_AUTH_SESSION';
-
-export const LOGOUT= 'LOGOUT';
-
-export const GET_USER = 'GET_USER';
-
-export const UPDATE_USER = 'UPDATE_USER';
+export interface IRegisterUserRequestAction {
+    readonly type: typeof REGISTER_USER_REQUEST;
+}
+export interface IRegisterUserSuccessAction {
+    readonly type: typeof REGISTER_USER_SUCCESS;
+    readonly payload: IUserData;
+}
+export interface IRegisterUserErrorAction {
+    readonly type: typeof REGISTER_USER_ERROR;
+}
 
 
-export function register(userData) {
+export interface ILoginRequestAction {
+    readonly type: typeof LOGIN_REQUEST;
+}
+export interface ILoginSuccessAction {
+    readonly type: typeof LOGIN_SUCCESS;
+    readonly payload: IUserData;
+}
+export interface ILoginErrorAction {
+    readonly type: typeof LOGIN_ERROR;
+}
+
+
+export interface ICheckAuthSessionAction {
+    readonly type: typeof CHECK_AUTH_SESSION;
+    readonly payload: string | undefined;
+}
+
+
+export interface ILogoutAction {
+    readonly type: typeof LOGOUT;
+    readonly payload: IUserData;
+}
+
+
+export interface IGetUserAction {
+    readonly type: typeof GET_USER;
+    readonly payload: IUserData;
+}
+
+
+export interface IUpdateUserAction {
+    readonly type: typeof UPDATE_USER;
+    readonly payload: IUserData;
+}
+
+
+export type TAuthActions = 
+    | IRegisterUserRequestAction
+    | IRegisterUserSuccessAction
+    | IRegisterUserErrorAction
+    | ILoginRequestAction
+    | ILoginSuccessAction
+    | ILoginErrorAction
+    | ICheckAuthSessionAction
+    | ILogoutAction
+    | IGetUserAction
+    | IUpdateUserAction;
+
+
+export function register(userData: IUserData) {
+    // @ts-ignore
     return function (dispatch) {
         dispatch({
             type: REGISTER_USER_REQUEST
         });
+    // @ts-ignore
         registerNewUser(userData).then(res => {
             if (res && res.success) {
                 Cookies.set('accessToken', res.accessToken);
@@ -41,11 +100,13 @@ export function register(userData) {
     };
 }
 
-export function login(userData) {
+export function login(userData: IUserLogin) {
+    // @ts-ignore
     return function (dispatch) {
         dispatch({
             type: LOGIN_REQUEST
         });
+        // @ts-ignore
         loginUser(userData).then(res => {
             Cookies.set('accessToken', res.accessToken);
             localStorage.setItem('refreshToken', res.refreshToken);
@@ -74,6 +135,7 @@ export const checkAuthSession = () => {
 }
 
 export function logout() {
+    // @ts-ignore
     return function (dispatch) {
         logoutUser().then(res => {
             if (res && res.success) {
@@ -90,7 +152,9 @@ export function logout() {
 }
 
 export function getUser() {
+    // @ts-ignore
     return function (dispatch) {
+        // @ts-ignore
         getUserData().then(res => {
             if (res && res.success) {
                 dispatch({
@@ -103,8 +167,10 @@ export function getUser() {
     };
 }
 
-export function updateUser(userData) {
+export function updateUser(userData: IUserData) {
+    // @ts-ignore
     return function (dispatch) {
+        // @ts-ignore
         setNewUserData(userData).then(res => {
             if (res && res.success) {
                 dispatch({

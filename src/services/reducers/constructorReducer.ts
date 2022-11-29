@@ -1,15 +1,19 @@
+import { IIngredientData } from '../../types/types';
 import {
     SELECT_INGREDIENT,
     UPDATE_CONSTRUCTOR_LIST,
-}
-    from '../actions/ingredientsActions';
+} from '../constants';
+import { TConstructorActions } from '../actions/constructorActions';
 
-const initialState = {
+type TConstructorState = {
+    selectedIngredients: ReadonlyArray<IIngredientData>,
+}
+
+const initialState: TConstructorState = {
     selectedIngredients: [],
-    currentItem: null,
 }
 
-export const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (state = initialState, action: TConstructorActions): TConstructorState => {
     switch (action.type) {
         case SELECT_INGREDIENT: {
             return {

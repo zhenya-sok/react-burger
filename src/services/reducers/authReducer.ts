@@ -1,20 +1,28 @@
+import { IUserData } from '../../types/types';
 import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_ERROR,
-
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
-
     CHECK_AUTH_SESSION,
     LOGOUT,
     GET_USER,
     UPDATE_USER,
-}
-    from '../actions/authActions';
+} from '../constants';
+import { TAuthActions } from '../actions/authActions';
 
-const initialState = {
+type TAuthState = {
+    user: undefined | IUserData;
+    registerRequest: boolean;
+    registerError: boolean;
+    loginRequest: boolean;
+    loginError: boolean;
+    token: undefined | string;
+}
+
+const initialState: TAuthState = {
     user: undefined,
     registerRequest: false,
     registerError: false,
@@ -23,7 +31,7 @@ const initialState = {
     token: undefined,
 }
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions): TAuthState  => {
     switch (action.type) {
         case REGISTER_USER_REQUEST: {
             return {
@@ -38,6 +46,7 @@ export const authReducer = (state = initialState, action) => {
                 registerError: false,
                 user: action.payload,
                 registerRequest: false,
+                // @ts-ignore
                 token: action.payload.accessToken
             }
         }
@@ -60,7 +69,9 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loginError: false,
+                // @ts-ignore
                 user: action.payload.user,
+                // @ts-ignore
                 token: action.payload.accessToken,
                 loginRequest: false,
             }
