@@ -25,7 +25,7 @@ const AppHeader: FC = () => {
                     <div className={`${styles.navBtn} pl-5 pr-5 pb-4 pt-4`}>
                         <div className="ml-2">
                             <NavLink 
-                                to="/profile/orders"
+                                to="/feed"
                                 className="text text_type_main-default text_color_inactive"
                                 activeClassName={styles.activeNavBtn}
                                 exact>
@@ -48,7 +48,7 @@ const AppHeader: FC = () => {
                             to="/profile"
                             className="text text_type_main-default text_color_inactive"
                             activeClassName={styles.activeNavBtn}
-                            exact>
+                            >
                                 <div className={styles.navBtn__icon}><ProfileIcon type="secondary" /></div>
                                 Личный кабинет
                         </NavLink>

@@ -20,6 +20,7 @@ import Modal from '../modal/modal';
 import IngredientDetail from '../ingredient-details/ingredient-details';
 import NotFound404 from '../../pages/not-found-404/not-found-404';
 import { Location } from 'history';
+import OrderFeed from '../../pages/order-feed/order-feed';
 
 type TLocationState = {
   background: Location;
@@ -72,6 +73,10 @@ const App: FC = () => {
           <ProtectedRoute path="/reset-password" exact>
             <ResetPassword />
           </ProtectedRoute>
+
+          <Route path="/feed" exact>
+            <OrderFeed />
+          </Route>
 
           <ProtectedRoute path="/profile" onlyForAuth={true}>
             <Profile />

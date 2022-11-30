@@ -3,7 +3,7 @@ import styles from './profile.module.css';
 import { Switch, Route } from 'react-router-dom';
 import ProfileNavMenu from './profile-nav-menu/profile-nav-menu';
 import ProfileInfo from './profile-info/profile-info';
-import OrderFeed from './order-feed/order-feed';
+import ProfileOrders from '../profile/profile-orders/profile-orders';
 
 const Profile: FC = () => {
 
@@ -17,8 +17,8 @@ const Profile: FC = () => {
                         <ProfileInfo />
                     </Route>
 
-                    <Route path="/profile/order" exact>
-                        <OrderFeed />
+                    <Route path="/profile/orders">
+                        <ProfileOrders />
                     </Route>
                 </Switch>
             </div>
