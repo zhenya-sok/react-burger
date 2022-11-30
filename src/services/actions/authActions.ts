@@ -13,6 +13,7 @@ import {
     GET_USER,
     UPDATE_USER
 } from '../constants';
+import { Dispatch } from 'redux';
 
 export interface IRegisterUserRequestAction {
     readonly type: typeof REGISTER_USER_REQUEST;
@@ -76,12 +77,10 @@ export type TAuthActions =
 
 
 export function register(userData: IUserData) {
-    // @ts-ignore
-    return function (dispatch) {
+    return function (dispatch: Dispatch) {
         dispatch({
             type: REGISTER_USER_REQUEST
         });
-    // @ts-ignore
         registerNewUser(userData).then(res => {
             if (res && res.success) {
                 Cookies.set('accessToken', res.accessToken);
@@ -101,12 +100,10 @@ export function register(userData: IUserData) {
 }
 
 export function login(userData: IUserLogin) {
-    // @ts-ignore
-    return function (dispatch) {
+    return function (dispatch: Dispatch) {
         dispatch({
             type: LOGIN_REQUEST
         });
-        // @ts-ignore
         loginUser(userData).then(res => {
             Cookies.set('accessToken', res.accessToken);
             localStorage.setItem('refreshToken', res.refreshToken);
@@ -135,8 +132,7 @@ export const checkAuthSession = () => {
 }
 
 export function logout() {
-    // @ts-ignore
-    return function (dispatch) {
+    return function (dispatch: Dispatch<TAuthActions>) {
         logoutUser().then(res => {
             if (res && res.success) {
                 Cookies.remove('accessToken');
@@ -152,9 +148,7 @@ export function logout() {
 }
 
 export function getUser() {
-    // @ts-ignore
-    return function (dispatch) {
-        // @ts-ignore
+    return function (dispatch: Dispatch) {
         getUserData().then(res => {
             if (res && res.success) {
                 dispatch({
@@ -168,9 +162,7 @@ export function getUser() {
 }
 
 export function updateUser(userData: IUserData) {
-    // @ts-ignore
-    return function (dispatch) {
-        // @ts-ignore
+    return function (dispatch: Dispatch) {
         setNewUserData(userData).then(res => {
             if (res && res.success) {
                 dispatch({

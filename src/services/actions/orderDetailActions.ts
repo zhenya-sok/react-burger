@@ -5,6 +5,7 @@ import {
     SET_ORDER_DETAIL_SUCCESS,
     SET_ORDER_DETAIL_ERROR,
 } from '../constants';
+import { Dispatch } from 'redux';
 
 export interface ISetOrderDetailRequestAction {
     readonly type: typeof SET_ORDER_DETAIL_REQUEST;
@@ -24,12 +25,10 @@ export type TOrderDetailActions =
 
 
 export function setOrderDetail(newOrder: IIngredientData[]) {
-    // @ts-ignore
-    return function (dispatch) {
+    return function (dispatch: Dispatch) {
         dispatch({
             type: SET_ORDER_DETAIL_REQUEST
         });
-        // @ts-ignore
         loadOrderDetails(newOrder).then(res => {
             if (res && res.success) {
                 dispatch({

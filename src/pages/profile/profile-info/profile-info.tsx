@@ -2,12 +2,11 @@ import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-component
 import React, { FC, useEffect } from 'react';
 import styles from './profile-info.module.css';
 import { getUser, updateUser } from '../../../services/actions/authActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../utils/hooks/hooks';
 
 const ProfileInfo: FC = () => {
 
     const dispatch = useDispatch();
-    // @ts-ignore
     const user = useSelector((state) => state.authReducer.user);
 
     const [nameValue, setNameValue] = React.useState('');
@@ -15,7 +14,6 @@ const ProfileInfo: FC = () => {
     const [passwordValue, setPasswordValue] = React.useState('');
 
     useEffect(() => {
-    // @ts-ignore
         dispatch(getUser());
     }, [dispatch])
 
@@ -26,13 +24,12 @@ const ProfileInfo: FC = () => {
     }, [user])
 
     const cancelСhanges = () => {
-        setNameValue(user.name);
-        setEmailValue(user.email);
+        user && setNameValue(user.name);
+        user && setEmailValue(user.email);
     }
 
     const saveNewUserData: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(updateUser({
             name: nameValue,
             email: emailValue

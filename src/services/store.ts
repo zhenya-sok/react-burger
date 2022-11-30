@@ -22,7 +22,7 @@ export const store = createStore(rootReducer, enhancer);
 export type RootState = ReturnType<typeof store.getState>;
 
 // Типизация всех экшенов приложения
-type TApplicationActions = 
+export type TApplicationActions = 
   | TAuthActions
   | TConstructorActions
   | TIngredientsActions

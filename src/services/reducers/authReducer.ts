@@ -46,7 +46,6 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
                 registerError: false,
                 user: action.payload,
                 registerRequest: false,
-                // @ts-ignore
                 token: action.payload.accessToken
             }
         }
@@ -69,9 +68,7 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
             return {
                 ...state,
                 loginError: false,
-                // @ts-ignore
                 user: action.payload.user,
-                // @ts-ignore
                 token: action.payload.accessToken,
                 loginRequest: false,
             }

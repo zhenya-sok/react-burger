@@ -18,7 +18,6 @@ const Register = () => {
     }
 
     const registerUser = () => {
-        // @ts-ignore
         dispatch(register({
             email: emailValue,
             password: passwordValue,

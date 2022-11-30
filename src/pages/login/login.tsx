@@ -2,7 +2,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import React, { FC } from 'react';
 import styles from './login.module.css';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../utils/hooks/hooks';
 import { login } from '../../services/actions/authActions';
 
 const Login: FC = () => {
@@ -17,7 +17,6 @@ const Login: FC = () => {
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => { 
         e.preventDefault();
-        // @ts-ignore
         dispatch(login({
             email: emailValue,
             password: passwordValue

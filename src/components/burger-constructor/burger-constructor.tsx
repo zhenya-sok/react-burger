@@ -3,7 +3,7 @@ import styles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks/hooks';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import ConstructorElementWrapper from './constructor-element-wrapper';
 import { useHistory } from 'react-router-dom';
@@ -16,12 +16,10 @@ interface IDragId extends IIngredientData {
 }
 
 const BurgerConstructor: FC = () => {
-    // @ts-ignore
     const selectedIngredients = useSelector((state) => state.constructorReducer.selectedIngredients);
     const [orderVisible, setOrderVisible] = useState(false);
     const dispatch = useDispatch();
     const selectedBun = selectedIngredients && selectedIngredients.find((item: IIngredientData) => item.type === "bun");
-    // @ts-ignore
     const orderData = useSelector((state) => state.orderReducer.orderData);
     const dragInsertBefore = useRef<undefined | string>();
 
@@ -54,7 +52,6 @@ const BurgerConstructor: FC = () => {
         }
     }, 0)
 
-    // @ts-ignore
     const isAuth = useSelector((state) => !!state.authReducer.token);
     const history = useHistory();
 
@@ -64,7 +61,6 @@ const BurgerConstructor: FC = () => {
         } else {
             const [bunId, ...rest] = selectedIngredients.map((item: IIngredientData) => item._id);
 
-            // @ts-ignore
             dispatch(setOrderDetail({
                 ingredients: [bunId, ...rest, bunId],
             }))

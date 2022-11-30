@@ -1,8 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from '../hooks/hooks';
 import { IIngredientData } from '../../types/types';
 
 export function useSelectedCountById(ingredientId: string) {
-    // @ts-ignore
     const selectedIngredients = useSelector((store) => store.constructorReducer.selectedIngredients)
 
     return selectedIngredients.reduce((result: number, currentIngredient: IIngredientData) => {

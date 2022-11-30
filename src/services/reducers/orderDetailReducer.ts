@@ -6,7 +6,7 @@ import {
 } from '../constants';
 import { TOrderDetailActions } from '../actions/orderDetailActions'
 
-type TOrderDetailState = {
+export type TOrderDetailState = {
     orderData: ReadonlyArray<IIngredientData>,
     orderDataRequest: boolean,
     orderDataError: boolean,
@@ -27,12 +27,10 @@ export const orderReducer = (state = initialState, action: TOrderDetailActions):
                 orderDataRequest: true
             }
         }
-        // @ts-ignore
         case SET_ORDER_DETAIL_SUCCESS: {
             return {
                 ...state,
                 orderDataError: false,
-                // @ts-ignore
                 orderData: action.orderData,
                 orderDataRequest: false
             }

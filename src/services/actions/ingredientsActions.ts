@@ -5,6 +5,7 @@ import {
     ADD_INGREDIENTS_SUCCESS,
     ADD_INGREDIENTS_ERROR,
 } from '../constants';
+import { Dispatch } from 'redux';
 
 export interface IAddIngredientsRequestAction {
     readonly type: typeof ADD_INGREDIENTS_REQUEST;
@@ -25,8 +26,7 @@ export type TIngredientsActions =
     
 
 export function addIngredients() {
-    // @ts-ignore
-    return function (dispatch) {
+    return function (dispatch: Dispatch) {
         dispatch({
             type: ADD_INGREDIENTS_REQUEST
         });
