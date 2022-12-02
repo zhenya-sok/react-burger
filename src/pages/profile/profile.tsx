@@ -3,12 +3,12 @@ import styles from './profile.module.css';
 import { Switch, Route } from 'react-router-dom';
 import ProfileNavMenu from './profile-nav-menu/profile-nav-menu';
 import ProfileInfo from './profile-info/profile-info';
-import OrderFeed from './order-feed/order-feed';
+import ProfileOrders from '../profile/profile-orders/profile-orders';
 
 const Profile: FC = () => {
 
     return (
-        <section className={`${styles.profileWrapper} text text_type_main-medium`}>
+        <main className={`${styles.profileWrapper} text text_type_main-medium`}>
             <ProfileNavMenu />
 
             <div className={styles.contentBlock}>
@@ -17,12 +17,12 @@ const Profile: FC = () => {
                         <ProfileInfo />
                     </Route>
 
-                    <Route path="/profile/order" exact>
-                        <OrderFeed />
+                    <Route path="/profile/orders">
+                        <ProfileOrders />
                     </Route>
                 </Switch>
             </div>
-        </section>
+        </main>
     )
 }
 

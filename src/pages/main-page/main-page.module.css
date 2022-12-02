@@ -1,0 +1,7 @@
+.mainWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 1240px;
+    margin: 0 auto;
+    padding: 0 60px 40px;
+}

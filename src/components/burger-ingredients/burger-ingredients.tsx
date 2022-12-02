@@ -55,41 +55,39 @@ const BurgerIngredients: FC = () => {
     }
 
     return (
-        <>
-            <section className={`${styles.ingredientsWrapper} mr-10`}>
-                <h1 className="text text_type_main-large mt-10 mb-5`">Соберите бургер</h1>
+        <section className={`${styles.ingredientsWrapper} mr-10`}>
+            <h1 className="text text_type_main-large mt-10 mb-5`">Соберите бургер</h1>
 
-                <div className={`${styles.ingredientsTab} mt-5`}>
-                    <Tab value="Булки" active={currentTab === 'Булки'} onClick={onTabClick}>Булки</Tab>
-                    <Tab value="Соусы" active={currentTab === 'Соусы'} onClick={onTabClick}>Соусы</Tab>
-                    <Tab value="Начинки" active={currentTab === 'Начинки'} onClick={onTabClick}>Начинки</Tab>
-                </div>
+            <div className={`${styles.ingredientsTab} mt-5`}>
+                <Tab value="Булки" active={currentTab === 'Булки'} onClick={onTabClick}>Булки</Tab>
+                <Tab value="Соусы" active={currentTab === 'Соусы'} onClick={onTabClick}>Соусы</Tab>
+                <Tab value="Начинки" active={currentTab === 'Начинки'} onClick={onTabClick}>Начинки</Tab>
+            </div>
 
-                <div className={`${styles.ingredientsList} mt-10`}>
-                    {ingredientsCategories.bun && <IngredientsGroup
-                        title="Булки"
-                        ingredients={ingredientsCategories.bun}
-                        showDetails={showIngredientDetails}
-                        titleId="Булки"
-                        ref={bunsRef}
-                    />}
-                    {ingredientsCategories.sauce && <IngredientsGroup
-                        title="Соусы"
-                        ingredients={ingredientsCategories.sauce}
-                        showDetails={showIngredientDetails}
-                        titleId="Соусы"
-                        ref={saucesRef}
-                    />}
-                    {ingredientsCategories.main && <IngredientsGroup
-                        title="Онсновное"
-                        ingredients={ingredientsCategories.main}
-                        showDetails={showIngredientDetails}
-                        titleId="Начинки"
-                        ref={mainsRef}
-                    />}
-                </div>
-            </section>
-        </>
+            <div className={`${styles.ingredientsList} mt-10`}>
+                {ingredientsCategories.bun && <IngredientsGroup
+                    title="Булки"
+                    ingredients={ingredientsCategories.bun}
+                    showDetails={showIngredientDetails}
+                    titleId="Булки"
+                    ref={bunsRef}
+                />}
+                {ingredientsCategories.sauce && <IngredientsGroup
+                    title="Соусы"
+                    ingredients={ingredientsCategories.sauce}
+                    showDetails={showIngredientDetails}
+                    titleId="Соусы"
+                    ref={saucesRef}
+                />}
+                {ingredientsCategories.main && <IngredientsGroup
+                    title="Онсновное"
+                    ingredients={ingredientsCategories.main}
+                    showDetails={showIngredientDetails}
+                    titleId="Начинки"
+                    ref={mainsRef}
+                />}
+            </div>
+        </section>
     )
 }
 
