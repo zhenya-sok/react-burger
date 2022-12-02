@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
 import styles from './order-feed.module.css';
+import OrderList from '../../components/orders-list/orders-list';
+import OrdersStatus from '../../components/orders-status/orders-status';
 
 const OrderFeed: FC = () => {
-
     return (
-        <div>
-            <h1>ORDER FEED PAGE</h1>
-        </div>
+        <main className={styles.mainWrapper}>
+            <OrderList title="Лента заказов"/>
+            <OrdersStatus />
+        </main>
     )
 }
 

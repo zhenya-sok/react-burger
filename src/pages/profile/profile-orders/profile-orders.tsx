@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import styles from './profile-orders.module.css';
+import OrderList from '../../../components/orders-list/orders-list';
 
 const ProfileOrders: FC = () => {
 
     return (
         <div>
-            <h1>PROFILE ORDER PAGE</h1>
+            <OrderList />
         </div>
     )
 }

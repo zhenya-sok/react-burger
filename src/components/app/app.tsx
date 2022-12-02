@@ -2,12 +2,8 @@ import React, { FC, useEffect } from 'react';
 import styles from './app.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { useDispatch } from 'react-redux';
 import { addIngredients, setCurrentItem } from '../../services/actions/ingredientsActions';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BrowserRouter, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Login from '../../pages/login/login';
 import Register from '../../pages/register/register';
@@ -21,6 +17,8 @@ import IngredientDetail from '../ingredient-details/ingredient-details';
 import NotFound404 from '../../pages/not-found-404/not-found-404';
 import { Location } from 'history';
 import OrderFeed from '../../pages/order-feed/order-feed';
+import MainPage from '../../pages/main-page/main-page';
+import OrderFeedItemDetail from '../order-feed-item-details/order-feed-item-details';
 
 type TLocationState = {
   background: Location;
@@ -50,12 +48,11 @@ const App: FC = () => {
         <AppHeader />
         <Switch location={background || location}>
           <Route path="/" exact>
-            <main className={styles.mainWrapper}>
-              <DndProvider backend={HTML5Backend}>
-                <BurgerIngredients />
-                <BurgerConstructor />
-              </DndProvider>
-            </main>
+            <MainPage />
+          </Route>
+
+          <Route path="/feed" exact>
+            <OrderFeed />
           </Route>
 
           <ProtectedRoute path="/login" exact>
@@ -74,10 +71,6 @@ const App: FC = () => {
             <ResetPassword />
           </ProtectedRoute>
 
-          <Route path="/feed" exact>
-            <OrderFeed />
-          </Route>
-
           <ProtectedRoute path="/profile" onlyForAuth={true}>
             <Profile />
           </ProtectedRoute>
@@ -87,7 +80,13 @@ const App: FC = () => {
               <IngredientDetail />
             </div>
           </Route>
-          
+
+          <Route path="/feed/:id" exact>
+            <div className="mt-30">
+              <OrderFeedItemDetail />
+            </div>
+          </Route>
+
           <Route>
             <NotFound404 />
           </Route>
@@ -97,6 +96,22 @@ const App: FC = () => {
           <Route path="/ingredients/:id" exact>
             <Modal titleText="Детали ингредиента" closeModal={handleModalClose}>
               <IngredientDetail />
+            </Modal>
+          </Route>
+        )}
+
+        {background && (
+          <Route path="/feed/:id" exact>
+            <Modal titleText="#12345" closeModal={handleModalClose}>
+              <OrderFeedItemDetail />
+            </Modal>
+          </Route>
+        )}
+
+        {background && (
+          <Route path="/profile/orders/:id" exact>
+            <Modal titleText="#12345" closeModal={handleModalClose}>
+              <OrderFeedItemDetail />
             </Modal>
           </Route>
         )}

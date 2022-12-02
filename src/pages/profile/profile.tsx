@@ -8,7 +8,7 @@ import ProfileOrders from '../profile/profile-orders/profile-orders';
 const Profile: FC = () => {
 
     return (
-        <section className={`${styles.profileWrapper} text text_type_main-medium`}>
+        <main className={`${styles.profileWrapper} text text_type_main-medium`}>
             <ProfileNavMenu />
 
             <div className={styles.contentBlock}>
@@ -22,7 +22,7 @@ const Profile: FC = () => {
                     </Route>
                 </Switch>
             </div>
-        </section>
+        </main>
     )
 }
 
