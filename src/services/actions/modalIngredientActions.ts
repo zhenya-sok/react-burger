@@ -1,4 +1,4 @@
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 import {
     SET_CURRENT_ITEM,
 } from '../constants';

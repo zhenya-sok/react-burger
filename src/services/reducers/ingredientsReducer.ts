@@ -1,4 +1,4 @@
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 import {
     ADD_INGREDIENTS_REQUEST,
     ADD_INGREDIENTS_SUCCESS,
@@ -7,7 +7,7 @@ import {
 import { TIngredientsActions } from '../actions/ingredientsActions';
 
 type TIngredientsState = {
-    ingredients: ReadonlyArray<IIngredientData>;
+    ingredients: IIngredientData[];
     ingredientsRequest: boolean;
     ingredientsError: boolean;
 };

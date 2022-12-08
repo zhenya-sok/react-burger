@@ -1,4 +1,4 @@
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 import {
     SELECT_INGREDIENT,
     UPDATE_CONSTRUCTOR_LIST,

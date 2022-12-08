@@ -4,7 +4,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsGroup from '../ingredients-group/ingredients-group';
 import { useDispatch, useSelector } from '../../utils/hooks/hooks';
 import { useInView } from "react-intersection-observer";
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 import { setCurrentItem } from '../../services/actions/modalIngredientActions';
 
 type IType = "bun" | "main" | "sauce";

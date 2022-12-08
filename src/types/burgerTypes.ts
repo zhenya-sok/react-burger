@@ -10,15 +10,16 @@ export interface IIngredientData {
     image: string;
     image_large: string;
     image_mobile: string;
+    dragId: string;
+    position: number;
 }
 
-export interface IUserData {
-    email: string;
-    password: string;
+export type TOrderNumber = {
     name: string;
+    order: TNumber;
+    success: boolean;
 }
 
-export interface IUserLogin {
-    email: string;
-    password: string;
+export type TNumber = {
+    number: number;
 }
