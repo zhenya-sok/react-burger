@@ -29,8 +29,7 @@ export function setOrderDetail(newOrder: object) {
         dispatch({
             type: SET_ORDER_DETAIL_REQUEST
         });
-        // @ts-ignore
-        loadOrderDetails(newOrder).then(res => {
+        loadOrderDetails(newOrder)?.then(res => {
             if (res && res.success) {
                 dispatch({
                     type: SET_ORDER_DETAIL_SUCCESS,
@@ -63,7 +62,6 @@ export function getOrderInfoByNumber(orderNumber: number) {
                 });
             }
         })
-        //@ts-ignore
         .catch((err) => dispatch({ type: SET_ORDER_DETAIL_ERROR }))
     }
 }

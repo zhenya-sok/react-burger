@@ -30,7 +30,6 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(addIngredients());
-    // @ts-ignore
     dispatch(checkAuthSession());
   }, [dispatch])
 

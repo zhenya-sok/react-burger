@@ -122,7 +122,7 @@ export function login(userData: IUserLogin) {
     };
 }
 
-export const checkAuthSession = () => {
+export const checkAuthSession = (): ICheckAuthSessionAction => {
     const accessToken = Cookies.get("accessToken");
 
     return {

@@ -6,18 +6,18 @@ import {
     ORDERS_WS_ERROR
 } from '../constants/index';
 import { TWsOrdersActions } from '../actions/wsAction';
-import { IWsOrder, WebsocketStatus } from '../../types/wsTypes';
+import { IWsOrder, TConnectionError, WebsocketStatus } from '../../types/wsTypes';
 
 export type TWsOrdersState = {
     status: WebsocketStatus,
-    connectionError: string,
-    orders: undefined | IWsOrder,
+    connectionError: null | TConnectionError,
+    orders: null | IWsOrder,
 }
 
 const initialState: TWsOrdersState = {
     status: WebsocketStatus.OFFLINE,
-    connectionError: '',
-    orders: undefined,
+    connectionError: null,
+    orders: null,
 };
 
 export const wsReducer = (state = initialState, action: TWsOrdersActions): TWsOrdersState => {
@@ -46,7 +46,6 @@ export const wsReducer = (state = initialState, action: TWsOrdersActions): TWsOr
         case ORDERS_WS_ERROR: {
             return {
                 ...state,
-                // @ts-ignore
                 connectionError: action.payload
             };
         }
@@ -54,7 +53,6 @@ export const wsReducer = (state = initialState, action: TWsOrdersActions): TWsOr
         case ORDERS_WS_MESSAGE: {
             return {
                 ...state,
-                // @ts-ignore
                 orders: action.payload
             };
         }  

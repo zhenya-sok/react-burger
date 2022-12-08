@@ -12,12 +12,11 @@ const OrderFeed: FC = () => {
 
     useEffect(() => {
         dispatch({ type: ORDERS_CONNECT, payload: ORDERS_SERVER_LIVE });
-    }, [])
+    }, [dispatch])
 
-    // @ts-ignore
-    // useEffect(() => {
-    //     return () => dispatch({ type: ORDERS_DISCONNECT })
-    // }, [])
+    useEffect((): any => {
+        return () => dispatch({ type: ORDERS_DISCONNECT })
+    }, [])
 
     const wsData = useSelector((state) => state.wsReducer.orders);
     const wsDataOrders = wsData && wsData.orders;

@@ -13,10 +13,10 @@ export function loadIngredients() {
   return fetchWithRefresh(ingredientsListUrl)
 };
 
-const accessToken = Cookies.get("accessToken");
 const orderDetailsUrl = `${BASE_URL}/orders`;
 
 export function loadOrderDetails(newOrder: object) {
+  const accessToken = Cookies.get("accessToken");
 
   if (typeof accessToken === 'string') {
     return fetchWithRefresh(orderDetailsUrl, {

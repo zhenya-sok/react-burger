@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styles from './order-feed-item-details.module.css';
 import { useDispatch, useSelector } from '../../utils/hooks/hooks';
 import { useLocation, useParams } from 'react-router-dom';
@@ -18,13 +18,10 @@ const OrderFeedItemDetail: FC = () => {
     const dispatch = useDispatch();
     const { id } = useParams<IParams>();
     const location = useLocation();
-    
-    
-    // useEffect(() => {
-    //     //@ts-ignore
-    //     orderItemInfo && dispatch(getOrderInfoByNumber());
-    //   }, [])
-
+        
+    useEffect(() => {
+        orderItemInfo && dispatch(getOrderInfoByNumber(orderItemInfo?.number));
+    }, [dispatch])
     
     const wsOrders = useSelector((state) => state.wsReducer.orders);
     const wsOrderData = wsOrders && wsOrders.orders;
@@ -50,9 +47,9 @@ const OrderFeedItemDetail: FC = () => {
             
             <h2 className="text text_type_main-medium  mt-15 mb-6">Состав:</h2>
             <ul className={`${styles.orderIngredientsList} mb-10`}>
-                {uniqArray && uniqArray.map((item: any, index: number) => {
+                {uniqArray && uniqArray.map((item, index) => {
                     const ingredientInfo = ingredientsData.filter((info) => info._id === item)[0];
-                    const ingredientAmount = Array.from(orderItemInfo.ingredients.entries()).filter((i: any) => i[1] === item).length;
+                    const ingredientAmount = Array.from(orderItemInfo.ingredients.entries()).filter((i) => i[1] === item).length;
                     
                     return (
                         <li key={index} className={styles.orderIngredientsList__item}>

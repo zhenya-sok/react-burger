@@ -1,4 +1,4 @@
-import { IWsOrder } from '../../types/wsTypes';
+import { IWsOrder, TConnectionError } from '../../types/wsTypes';
 import {
     ORDERS_CONNECT,
     ORDERS_DISCONNECT,
@@ -34,15 +34,11 @@ export interface IOrdersWsCloseAction {
 }
 export interface IOrdersWsMessageAction {
     readonly type: typeof ORDERS_WS_MESSAGE;
-    readonly payload: {
-        orders: IWsOrder[];
-    }
+    readonly payload: IWsOrder;
 }
 export interface IOrdersWsErrorAction {
     readonly type: typeof ORDERS_WS_ERROR;
-    readonly payload: {
-        connectionError: string;
-    }
+    readonly payload: null | TConnectionError;
 }
 
 export type TWsOrdersActions = 
@@ -72,15 +68,11 @@ export interface IProfileOrdersWsCloseAction {
 }
 export interface IProfileOrdersWsMessageAction {
     readonly type: typeof PROFILE_ORDERS_WS_MESSAGE;
-    readonly payload: {
-        orders: IWsOrder[];
-    }
+    readonly payload: IWsOrder;
 }
 export interface IProfileOrdersWsErrorAction {
     readonly type: typeof PROFILE_ORDERS_WS_ERROR;
-    readonly payload: {
-        connectionError: string;
-    }
+    readonly payload: null | TConnectionError;
 }
 
 export type TWsProfileOrdersActions = 
@@ -91,4 +83,3 @@ export type TWsProfileOrdersActions =
     | IProfileOrdersWsCloseAction
     | IProfileOrdersWsMessageAction
     | IProfileOrdersWsErrorAction;
-    
