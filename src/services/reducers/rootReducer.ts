@@ -2,13 +2,15 @@ import { combineReducers } from 'redux';
 import { ingredientsReducer } from './ingredientsReducer';
 import { constructorReducer } from './constructorReducer';
 import { modalIngredientReducer } from './modalIngredientReducer';
-import { orderReducer } from './orderDetailReducer';
+import { orderDetailReducer } from './orderDetailReducer';
 import { authReducer } from './authReducer';
+import { wsReducer } from './wsReducer';
 
 export const rootReducer = combineReducers({
     ingredientsReducer: ingredientsReducer,
     constructorReducer: constructorReducer,
     modalIngredientReducer: modalIngredientReducer,
-    orderReducer: orderReducer,
+    orderDetailReducer: orderDetailReducer,
     authReducer: authReducer,
+    wsReducer: wsReducer,
 })

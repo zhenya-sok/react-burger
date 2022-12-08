@@ -1,6 +1,6 @@
 import { registerNewUser, loginUser, logoutUser, getUserData, setNewUserData } from '../../utils/api';
 import Cookies from 'js-cookie';
-import { IUserData, IUserLogin } from '../../types/types';
+import { IRegisrerUser, IUser, IUserData, IUserLogin } from '../../types/authTypes';
 import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
@@ -13,14 +13,14 @@ import {
     GET_USER,
     UPDATE_USER
 } from '../constants';
-import { Dispatch } from 'redux';
+import { AppDispatch } from '../store';
 
 export interface IRegisterUserRequestAction {
     readonly type: typeof REGISTER_USER_REQUEST;
 }
 export interface IRegisterUserSuccessAction {
     readonly type: typeof REGISTER_USER_SUCCESS;
-    readonly payload: IUserData;
+    readonly payload: IRegisrerUser;
 }
 export interface IRegisterUserErrorAction {
     readonly type: typeof REGISTER_USER_ERROR;
@@ -59,7 +59,7 @@ export interface IGetUserAction {
 
 export interface IUpdateUserAction {
     readonly type: typeof UPDATE_USER;
-    readonly payload: IUserData;
+    readonly payload: IUser;
 }
 
 
@@ -76,8 +76,8 @@ export type TAuthActions =
     | IUpdateUserAction;
 
 
-export function register(userData: IUserData) {
-    return function (dispatch: Dispatch) {
+export function register(userData: IRegisrerUser) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: REGISTER_USER_REQUEST
         });
@@ -100,7 +100,7 @@ export function register(userData: IUserData) {
 }
 
 export function login(userData: IUserLogin) {
-    return function (dispatch: Dispatch) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: LOGIN_REQUEST
         });
@@ -132,7 +132,7 @@ export const checkAuthSession = () => {
 }
 
 export function logout() {
-    return function (dispatch: Dispatch<TAuthActions>) {
+    return function (dispatch: AppDispatch) {
         logoutUser().then(res => {
             if (res && res.success) {
                 Cookies.remove('accessToken');
@@ -143,13 +143,13 @@ export function logout() {
                 });
             }
         })
-        .catch(err => alert(err))
+        .catch(err => console.log(err))
     };
 }
 
 export function getUser() {
-    return function (dispatch: Dispatch) {
-        getUserData().then(res => {
+    return function (dispatch: AppDispatch) {
+        getUserData()?.then(res => {
             if (res && res.success) {
                 dispatch({
                     type: GET_USER,
@@ -157,13 +157,13 @@ export function getUser() {
                 });
             } 
         })
-        .catch(err => alert(err))
+        .catch(err => console.log(err))
     };
 }
 
-export function updateUser(userData: IUserData) {
-    return function (dispatch: Dispatch) {
-        setNewUserData(userData).then(res => {
+export function updateUser(userData: IUser) {
+    return function (dispatch: AppDispatch) {
+        setNewUserData(userData)?.then(res => {
             if (res && res.success) {
                 dispatch({
                     type: UPDATE_USER,
@@ -171,6 +171,6 @@ export function updateUser(userData: IUserData) {
                 });
             } 
         })
-        .catch(err => alert(err))
+        .catch(err => console.log(err))
     };
 }
