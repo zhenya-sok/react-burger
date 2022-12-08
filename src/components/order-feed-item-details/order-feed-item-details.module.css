@@ -4,6 +4,7 @@
     align-items: start;
     width: 640px;
     margin: 0 auto;
+    position: relative;
 }
 
 .orderNumber {
@@ -11,8 +12,13 @@
     text-align: center;
 }
 
-.orderStatus {
-    color: #00CCCC;
+.orderNumberModal {
+    position: absolute;
+    top: -47px;
+}
+
+.orderNameMargin {
+    margin-top: 20px;
 }
 
 .orderIngredientsList {
@@ -20,7 +26,7 @@
     flex-direction: column;
     width: 100%;
     gap: 16px;
-    height: auto;
+    height: 322px;
     overflow-y: scroll;
     scrollbar-width: thin;
     list-style: none;
@@ -36,13 +42,14 @@
 }
 
 .orderIngredientsList::-webkit-scrollbar-thumb {
-    height: 492px;
+    height: 140px;
     background-color: #8585AD;
 }
 
 .orderIngredientsList__item {
     display: grid;
     grid-template-columns: auto 1fr auto;
+    align-items: center;
     grid-gap: 16px;
 }
 

@@ -12,10 +12,13 @@
 .orderStatus__status_inWorkList {
     display: grid;
     grid-gap: 8px;
+    grid-template-rows: repeat(10, 1fr);
+    grid-auto-flow: column;
 }
 
 .orderStatus__status_readyList {
     color: #00CCCC;
+    padding: 0; 
 }
 
 .textShadow {

@@ -23,3 +23,23 @@
 .orderPrice span {
     margin-right: 8px;
 }
+
+.ingredientsImadesList {
+    display: flex;
+    padding: 0;
+}
+
+.ingredientsImadesList li {
+    margin-right: -16px;
+}
+
+.lastVisibleIngredientImage {
+    position: relative;
+}
+
+.lastVisibleIngredientImage span{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
