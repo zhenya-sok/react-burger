@@ -1,6 +1,7 @@
 import {checkResponse} from "./checkResponse";
 import { fetchWithRefresh, BASE_URL } from './fetchWithRefresh';
 import Cookies from "js-cookie";
+import { IRegisrerUser, IUser, IUserLogin } from "../types/authTypes";
 
 function request(url: string, options: object) {
   return fetch(url, options).then(checkResponse)
@@ -12,17 +13,33 @@ export function loadIngredients() {
   return fetchWithRefresh(ingredientsListUrl)
 };
 
+const accessToken = Cookies.get("accessToken");
 const orderDetailsUrl = `${BASE_URL}/orders`;
 
-export function loadOrderDetails(newOrder: string[]) {
-  return fetchWithRefresh(orderDetailsUrl, {
-    method: 'POST',
-    body: JSON.stringify(newOrder),
+export function loadOrderDetails(newOrder: object) {
+
+  if (typeof accessToken === 'string') {
+    return fetchWithRefresh(orderDetailsUrl, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        authorization: accessToken
+      },
+      body: JSON.stringify(newOrder)
+    })
+  }
+}
+
+export const getOrderByNumber = (orderNumber: number) => {
+  const orderInfoUrl = `${BASE_URL}/orders/${orderNumber}`;
+
+  return fetchWithRefresh(orderInfoUrl, {
+    method: "GET",
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      "Content-Type": "application/json",
     },
   })
-}
+};
 
 const forgotPasswordUrl = `${BASE_URL}/password-reset`;
 
@@ -57,7 +74,7 @@ export function resetPassword(password: string, token: string) {
 
 const loginUserUrl = `${BASE_URL}/auth/login`;
 
-export function loginUser(userData: object []) {
+export function loginUser(userData: IUserLogin) {
   return request(loginUserUrl, {
     method: 'POST',
     body: JSON.stringify(userData),
@@ -69,7 +86,7 @@ export function loginUser(userData: object []) {
 
 const registerNewUserUrl = `${BASE_URL}/auth/register`;
 
-export function registerNewUser(userData: object []) {
+export function registerNewUser(userData: IRegisrerUser) {
   return request(registerNewUserUrl, {
     method: 'POST',
     body: JSON.stringify(userData),
@@ -109,7 +126,7 @@ export function getUserData() {
   }
 }
 
-export function setNewUserData(userData: object []) {
+export function setNewUserData(userData: IUser) {
   const accessToken = Cookies.get("accessToken");
 
   if (typeof accessToken === 'string') {
