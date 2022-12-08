@@ -1,18 +1,18 @@
-import { loadOrderDetails } from '../../utils/api';
-import { IIngredientData } from '../../types/types';
+import { TOrderNumber } from '../../types/burgerTypes';
+import { getOrderByNumber, loadOrderDetails } from '../../utils/api';
 import {
     SET_ORDER_DETAIL_REQUEST,
     SET_ORDER_DETAIL_SUCCESS,
     SET_ORDER_DETAIL_ERROR,
 } from '../constants';
-import { Dispatch } from 'redux';
+import { AppDispatch } from '../store';
 
 export interface ISetOrderDetailRequestAction {
     readonly type: typeof SET_ORDER_DETAIL_REQUEST;
 }
 export interface ISetOrderDetailSuccessAction {
-    readonly type: typeof SET_ORDER_DETAIL_ERROR;
-    readonly orderData: IIngredientData[];
+    readonly type: typeof SET_ORDER_DETAIL_SUCCESS;
+    readonly orderData: TOrderNumber;
 }
 export interface ISetOrderDetailErrorAction {
     readonly type: typeof SET_ORDER_DETAIL_ERROR;
@@ -24,11 +24,12 @@ export type TOrderDetailActions =
     | ISetOrderDetailErrorAction;
 
 
-export function setOrderDetail(newOrder: IIngredientData[]) {
-    return function (dispatch: Dispatch) {
+export function setOrderDetail(newOrder: object) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: SET_ORDER_DETAIL_REQUEST
         });
+        // @ts-ignore
         loadOrderDetails(newOrder).then(res => {
             if (res && res.success) {
                 dispatch({
@@ -41,6 +42,28 @@ export function setOrderDetail(newOrder: IIngredientData[]) {
                 });
             }
         })
-        .catch(err => dispatch({ type: SET_ORDER_DETAIL_ERROR }))
+        .catch((err) => dispatch({ type: SET_ORDER_DETAIL_ERROR }))
     };
+}
+
+export function getOrderInfoByNumber(orderNumber: number) {
+    return function (dispatch: AppDispatch) {
+        dispatch({
+            type: SET_ORDER_DETAIL_REQUEST
+        });
+        getOrderByNumber(orderNumber).then(res => {
+            if (res && res.success) {
+                dispatch({
+                    type: SET_ORDER_DETAIL_SUCCESS,
+                    orderData: res
+                });
+            } else {
+                dispatch({
+                    type: SET_ORDER_DETAIL_ERROR
+                });
+            }
+        })
+        //@ts-ignore
+        .catch((err) => dispatch({ type: SET_ORDER_DETAIL_ERROR }))
+    }
 }

@@ -2,8 +2,8 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import React from 'react';
 import styles from './register.module.css';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { register } from '../../services/actions/authActions';
+import { useDispatch } from '../../utils/hooks/hooks';
 
 const Register = () => {
     const [nameValue, setNameValue] = React.useState('');

@@ -1,4 +1,4 @@
-import { IIngredientData } from '../../types/types';
+import { TOrderNumber } from '../../types/burgerTypes';
 import {
     SET_ORDER_DETAIL_REQUEST,
     SET_ORDER_DETAIL_SUCCESS,
@@ -7,19 +7,19 @@ import {
 import { TOrderDetailActions } from '../actions/orderDetailActions'
 
 export type TOrderDetailState = {
-    orderData: ReadonlyArray<IIngredientData>,
+    orderData: undefined | TOrderNumber,
     orderDataRequest: boolean,
     orderDataError: boolean,
 }
 
 const initialState: TOrderDetailState = {
-    orderData: [],
+    orderData: undefined,
     orderDataRequest: false,
     orderDataError: false,
 }
 
 
-export const orderReducer = (state = initialState, action: TOrderDetailActions): TOrderDetailState => {
+export const orderDetailReducer = (state = initialState, action: TOrderDetailActions): TOrderDetailState => {
     switch (action.type) {
         case SET_ORDER_DETAIL_REQUEST: {
             return {
@@ -38,7 +38,7 @@ export const orderReducer = (state = initialState, action: TOrderDetailActions):
         case SET_ORDER_DETAIL_ERROR: {
             return {
                 ...state,
-                orderData: [],
+                orderData: undefined,
                 orderDataError: true,
                 orderDataRequest: false
             }

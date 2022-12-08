@@ -2,12 +2,8 @@ import React, { FC, useEffect } from 'react';
 import styles from './app.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { useDispatch } from '../../utils/hooks/hooks';
 import { setCurrentItem } from '../../services/actions/modalIngredientActions';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BrowserRouter, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Login from '../../pages/login/login';
 import Register from '../../pages/register/register';
@@ -23,6 +19,7 @@ import { Location } from 'history';
 import OrderFeed from '../../pages/order-feed/order-feed';
 import MainPage from '../../pages/main-page/main-page';
 import OrderFeedItemDetail from '../order-feed-item-details/order-feed-item-details';
+import { addIngredients } from '../../services/actions/ingredientsActions';
 
 type TLocationState = {
   background: Location;
@@ -33,9 +30,10 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(addIngredients());
+    // @ts-ignore
     dispatch(checkAuthSession());
   }, [dispatch])
-  
+
   const ModalSwitch = () => {
     const location = useLocation<TLocationState>();
     const history = useHistory();
@@ -105,7 +103,7 @@ const App: FC = () => {
 
         {background && (
           <Route path="/feed/:id" exact>
-            <Modal titleText="#12345" closeModal={handleModalClose}>
+            <Modal closeModal={handleModalClose}>
               <OrderFeedItemDetail />
             </Modal>
           </Route>
@@ -113,7 +111,7 @@ const App: FC = () => {
 
         {background && (
           <Route path="/profile/orders/:id" exact>
-            <Modal titleText="#12345" closeModal={handleModalClose}>
+            <Modal closeModal={handleModalClose}>
               <OrderFeedItemDetail />
             </Modal>
           </Route>

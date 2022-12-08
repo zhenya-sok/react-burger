@@ -1,5 +1,5 @@
 import { useSelector } from '../hooks/hooks';
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 
 export function useSelectedCountById(ingredientId: string) {
     const selectedIngredients = useSelector((store) => store.constructorReducer.selectedIngredients)

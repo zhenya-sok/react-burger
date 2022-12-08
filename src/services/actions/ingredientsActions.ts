@@ -1,11 +1,11 @@
 import { loadIngredients } from '../../utils/api';
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 import {
     ADD_INGREDIENTS_REQUEST,
     ADD_INGREDIENTS_SUCCESS,
     ADD_INGREDIENTS_ERROR,
 } from '../constants';
-import { Dispatch } from 'redux';
+import { AppDispatch } from '../store';
 
 export interface IAddIngredientsRequestAction {
     readonly type: typeof ADD_INGREDIENTS_REQUEST;
@@ -26,7 +26,7 @@ export type TIngredientsActions =
     
 
 export function addIngredients() {
-    return function (dispatch: Dispatch) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: ADD_INGREDIENTS_REQUEST
         });

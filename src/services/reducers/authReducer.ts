@@ -1,4 +1,4 @@
-import { IUserData } from '../../types/types';
+import { IUser, IUserData } from '../../types/authTypes';
 import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
@@ -14,7 +14,7 @@ import {
 import { TAuthActions } from '../actions/authActions';
 
 type TAuthState = {
-    user: undefined | IUserData;
+    user: undefined | IUserData | IUser;
     registerRequest: boolean;
     registerError: boolean;
     loginRequest: boolean;
