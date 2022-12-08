@@ -8,19 +8,16 @@ import { DropTargetMonitor, useDrop } from 'react-dnd';
 import ConstructorElementWrapper from './constructor-element-wrapper';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 import { addSelectIngredient, updateIngredientsList } from '../../services/actions/constructorActions';
-
-interface IDragId extends IIngredientData {
-    dragId: string;
-}
+import { setOrderDetail } from '../../services/actions/orderDetailActions';
 
 const BurgerConstructor: FC = () => {
     const selectedIngredients = useSelector((state) => state.constructorReducer.selectedIngredients);
     const [orderVisible, setOrderVisible] = useState(false);
     const dispatch = useDispatch();
     const selectedBun = selectedIngredients && selectedIngredients.find((item: IIngredientData) => item.type === "bun");
-    const orderData = useSelector((state) => state.orderReducer.orderData);
+    const orderData = useSelector((state) => state.orderDetailReducer.orderData);
     const dragInsertBefore = useRef<undefined | string>();
 
     const appSelectedIngredient = (ingredientRaw: IIngredientData) => {
@@ -112,10 +109,10 @@ const BurgerConstructor: FC = () => {
             dragInsertBefore.current = insertBeforeDragId
         },
         drop(item) {
-            if ((item as IDragId).type === 'bun') return
+            if ((item as IIngredientData).type === 'bun') return
 
             const selectedIngredientsCopy = [...selectedIngredients]
-            const draggingElement = selectedIngredientsCopy.find((ingr) => ingr.dragId === (item as IDragId).dragId)
+            const draggingElement = selectedIngredientsCopy.find((ingr) => ingr.dragId === (item as IIngredientData).dragId)
             const insertBeforeElementIndex = selectedIngredientsCopy.findIndex((ingr) => ingr.dragId === dragInsertBefore.current)
             const insertBeforeElement = selectedIngredientsCopy[insertBeforeElementIndex]
 
@@ -123,14 +120,14 @@ const BurgerConstructor: FC = () => {
                 return
             }
 
-            if (insertBeforeElementIndex === selectedIngredientsCopy.length - 1) {
+            if (draggingElement && insertBeforeElementIndex === selectedIngredientsCopy.length - 1) {
                 draggingElement.position = insertBeforeElement.position + 1
             } else {
-                if (draggingElement.position < insertBeforeElement.position) {
+                if (draggingElement && draggingElement.position < insertBeforeElement.position) {
                     const afterInsertBeforeElementIndex = insertBeforeElementIndex + 1
                     const afterInsertBeforeElement = selectedIngredientsCopy[afterInsertBeforeElementIndex]
                     draggingElement.position = (insertBeforeElement.position + afterInsertBeforeElement.position) / 2
-                } else {
+                } else if (draggingElement) {
                     const beforeInsertBeforeElementIndex = insertBeforeElementIndex - 1
                     const beforeInsertBeforeElement = selectedIngredientsCopy[beforeInsertBeforeElementIndex]
                     draggingElement.position = (insertBeforeElement.position + beforeInsertBeforeElement.position) / 2
@@ -164,7 +161,7 @@ const BurgerConstructor: FC = () => {
                 }
 
                 <div className={`${styles.ingredientsCombo} mt-4 mb-4 pr-2`}>
-                    {selectedIngredients && selectedIngredients.map((item: IDragId) => {
+                    {selectedIngredients && selectedIngredients.map((item: IIngredientData) => {
                         if (item.type !== "bun")
                             return (
                                 <ConstructorElementWrapper
@@ -210,7 +207,8 @@ const BurgerConstructor: FC = () => {
                     Оформить заказ
                 </Button>
             </div>
-            {orderVisible && orderData.order && (
+            
+            {orderVisible && orderData?.order && (
                 <Modal closeModal={closeOrderNumber}>
                     <OrderDetails bookingNumber={orderData.order && orderData.order.number} />
                 </Modal>
