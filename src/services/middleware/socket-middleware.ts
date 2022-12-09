@@ -17,7 +17,7 @@ export const socketMiddleware: any = (wsActions: TWsActions): Middleware<{}, Roo
         let socket: WebSocket | null = null;
         let url = "";
         let isConnected = false;
-;        let reconnectTimer = 0;
+        let reconnectTimer = 0;
         
         return next => action => {
             const { dispatch } = store;
@@ -73,7 +73,6 @@ export const socketMiddleware: any = (wsActions: TWsActions): Middleware<{}, Roo
                     reconnectTimer = 0;
                     dispatch({ type: wsClose });
                     socket.close();
-                    
                 }
 
             }

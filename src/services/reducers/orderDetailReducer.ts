@@ -24,7 +24,8 @@ export const orderDetailReducer = (state = initialState, action: TOrderDetailAct
         case SET_ORDER_DETAIL_REQUEST: {
             return {
                 ...state,
-                orderDataRequest: true
+                orderDataRequest: true,
+                orderData: undefined
             }
         }
         case SET_ORDER_DETAIL_SUCCESS: {

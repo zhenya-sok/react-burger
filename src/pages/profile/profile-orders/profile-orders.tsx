@@ -15,11 +15,9 @@ const ProfileOrders: FC = () => {
     
     const PROFILE_ORDERS_SERVER_LIVE = `wss://norma.nomoreparties.space/orders/?token=${token}`;
 
-    useEffect(() => {
-        dispatch({ type: PROFILE_ORDERS_CONNECT, payload: PROFILE_ORDERS_SERVER_LIVE });
-    }, [dispatch])
-
     useEffect((): any => {
+        dispatch({ type: PROFILE_ORDERS_CONNECT, payload: PROFILE_ORDERS_SERVER_LIVE });
+
         return () => dispatch({ type: PROFILE_ORDERS_DISCONNECT })
     }, [])
 

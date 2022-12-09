@@ -13,6 +13,10 @@ const OrdersStatus: FC = () => {
     const wsReadyOrders = wsOrdersDetails && wsOrdersDetails.filter((item: IOrderItem) => item.status === "done");
     const wsInWorkOrders = wsOrdersDetails && wsOrdersDetails.filter((item: IOrderItem) => item.status !== "done");
 
+    if (wsReadyOrders) {
+        wsReadyOrders.length = 15;
+    }
+
     return (
         <main className={`${styles.ordersStatusWrapper} pl-10 pt-25`}>
             <section className={`${styles.ordersStatus__status} mb-15`}>

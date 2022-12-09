@@ -10,11 +10,9 @@ const OrderFeed: FC = () => {
 
     const ORDERS_SERVER_LIVE = "wss://norma.nomoreparties.space/orders/all";
 
-    useEffect(() => {
-        dispatch({ type: ORDERS_CONNECT, payload: ORDERS_SERVER_LIVE });
-    }, [dispatch])
-
     useEffect((): any => {
+        dispatch({ type: ORDERS_CONNECT, payload: ORDERS_SERVER_LIVE });
+
         return () => dispatch({ type: ORDERS_DISCONNECT })
     }, [])
 
