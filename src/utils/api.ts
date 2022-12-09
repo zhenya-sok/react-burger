@@ -30,10 +30,10 @@ export function loadOrderDetails(newOrder: object) {
   }
 }
 
-export const getOrderByNumber = (orderNumber: number) => {
-  const orderInfoUrl = `${BASE_URL}/orders/${orderNumber}`;
+export const getOrderById = (orderId: string) => {
+  const orderInfoUrl = `${BASE_URL}/orders/${orderId}`;
 
-  return fetchWithRefresh(orderInfoUrl, {
+  return request(orderInfoUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

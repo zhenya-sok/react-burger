@@ -1,5 +1,5 @@
 import { TOrderNumber } from '../../types/burgerTypes';
-import { getOrderByNumber, loadOrderDetails } from '../../utils/api';
+import { getOrderById, loadOrderDetails } from '../../utils/api';
 import {
     SET_ORDER_DETAIL_REQUEST,
     SET_ORDER_DETAIL_SUCCESS,
@@ -45,23 +45,16 @@ export function setOrderDetail(newOrder: object) {
     };
 }
 
-export function getOrderInfoByNumber(orderNumber: number) {
+export function getOrderInfo(orderId: string) {
     return function (dispatch: AppDispatch) {
-        dispatch({
-            type: SET_ORDER_DETAIL_REQUEST
-        });
-        getOrderByNumber(orderNumber).then(res => {
-            if (res && res.success) {
+        getOrderById(orderId).then(res => {
+            if (res && res.success) {                
                 dispatch({
                     type: SET_ORDER_DETAIL_SUCCESS,
                     orderData: res
                 });
-            } else {
-                dispatch({
-                    type: SET_ORDER_DETAIL_ERROR
-                });
             }
         })
-        .catch((err) => dispatch({ type: SET_ORDER_DETAIL_ERROR }))
-    }
+        .catch(err => console.log(err))
+    };
 }

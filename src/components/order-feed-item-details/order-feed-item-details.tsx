@@ -7,7 +7,7 @@ import { IOrderItem } from '../../types/wsTypes';
 import OrderIngredientImage from '../order-ingredient-image/order-ingredient-image';
 import { IIngredientData } from '../../types/burgerTypes';
 import OrderStatusItemComponent from '../order-status-item-component/order-status-item-component';
-import { getOrderInfoByNumber } from '../../services/actions/orderDetailActions';
+import { getOrderInfo } from '../../services/actions/orderDetailActions';
 
 interface IParams {
     id: string;
@@ -20,8 +20,12 @@ const OrderFeedItemDetail: FC = () => {
     const location = useLocation();
         
     useEffect(() => {
-        orderItemInfo && dispatch(getOrderInfoByNumber(orderItemInfo?.number));
+        dispatch(getOrderInfo(id));
     }, [dispatch])
+
+    const orderInfo = useSelector((state) => state.orderDetailReducer.orderData);
+    console.log(orderInfo);
+    
     
     const wsOrders = useSelector((state) => state.wsReducer.orders);
     const wsOrderData = wsOrders && wsOrders.orders;
