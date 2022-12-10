@@ -12,6 +12,10 @@
     text-align: center;
 }
 
+.ingredientName {
+    text-align: start;
+}
+
 .orderNumberModal {
     position: absolute;
     top: -47px;

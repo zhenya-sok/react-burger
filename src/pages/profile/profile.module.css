@@ -12,8 +12,10 @@
     transform: translate(-50%, -50%);
 }
 
-.contentBlock {
-    display: grid;
-    grid-gap: 24px;
-    max-height: 240px;
+.profile__OrderFeedItem {
+    position: absolute;
+    top: 58.5%;
+    left: 50%;
+    bottom: -50%;
+    transform: translate(-50%, -50%);
 }

@@ -24,7 +24,7 @@ const OrderFeedItem: FC<IOrderFeedItemProps> = ({ wsOrderDetail }) => {
     const pathname = location.pathname;
 
     function navigate(id: string) {
-        history.push(`${pathname}/${id}`, { background: location });        
+        history.push(`${pathname}/${id}`, { background: location });
     }
     
     const visibleIngredients = [...wsOrderDetail.ingredients];

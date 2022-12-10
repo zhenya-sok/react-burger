@@ -31,7 +31,7 @@ export function loadOrderDetails(newOrder: object) {
 }
 
 export const getOrderById = (orderId: string) => {
-  const orderInfoUrl = `${BASE_URL}/orders/${orderId}`;
+  const orderInfoUrl = `${BASE_URL}/orders/"${orderId}"`;
 
   return request(orderInfoUrl, {
     method: "GET",

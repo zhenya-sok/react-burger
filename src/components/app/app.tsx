@@ -18,8 +18,9 @@ import NotFound404 from '../../pages/not-found-404/not-found-404';
 import { Location } from 'history';
 import OrderFeed from '../../pages/order-feed/order-feed';
 import MainPage from '../../pages/main-page/main-page';
-import OrderFeedItemDetail from '../order-feed-item-details/order-feed-item-details';
 import { addIngredients } from '../../services/actions/ingredientsActions';
+import PublicOrdersFeedModal from '../publick-orders-feed-modal/public-orders-feed-modal';
+import PersonalOrdersFeedModal from '../personal-orders-feed-modal/personal-orders-feed-modal';
 
 type TLocationState = {
   background: Location;
@@ -83,7 +84,7 @@ const App: FC = () => {
 
           <Route path="/feed/:id" exact>
             <div className="mt-30">
-              <OrderFeedItemDetail />
+              <PublicOrdersFeedModal />
             </div>
           </Route>
 
@@ -103,7 +104,7 @@ const App: FC = () => {
         {background && (
           <Route path="/feed/:id" exact>
             <Modal closeModal={handleModalClose}>
-              <OrderFeedItemDetail />
+              <PublicOrdersFeedModal />
             </Modal>
           </Route>
         )}
@@ -111,7 +112,7 @@ const App: FC = () => {
         {background && (
           <Route path="/profile/orders/:id" exact>
             <Modal closeModal={handleModalClose}>
-              <OrderFeedItemDetail />
+              <PersonalOrdersFeedModal />
             </Modal>
           </Route>
         )}
@@ -121,9 +122,7 @@ const App: FC = () => {
 
   return (
     <BrowserRouter>
-      <React.StrictMode>
-        <ModalSwitch />
-      </React.StrictMode>
+      <ModalSwitch />
     </BrowserRouter>
   )
 }

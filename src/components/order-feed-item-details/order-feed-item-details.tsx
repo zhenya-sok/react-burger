@@ -1,41 +1,31 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import styles from './order-feed-item-details.module.css';
-import { useDispatch, useSelector } from '../../utils/hooks/hooks';
+import { useSelector } from '../../utils/hooks/hooks';
 import { useLocation, useParams } from 'react-router-dom';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IOrderItem } from '../../types/wsTypes';
+import { IWsOrder } from '../../types/wsTypes';
 import OrderIngredientImage from '../order-ingredient-image/order-ingredient-image';
 import { IIngredientData } from '../../types/burgerTypes';
 import OrderStatusItemComponent from '../order-status-item-component/order-status-item-component';
-import { getOrderInfo } from '../../services/actions/orderDetailActions';
 
 interface IParams {
     id: string;
 };
 
-const OrderFeedItemDetail: FC = () => {
+interface IOrderFeedItemDetailProps {
+    ordersData: IWsOrder;
+};
 
-    const dispatch = useDispatch();
+const OrderFeedItemDetail: FC<IOrderFeedItemDetailProps> = ({ ordersData }) => {
+
     const { id } = useParams<IParams>();
     const location = useLocation();
-        
-    useEffect(() => {
-        dispatch(getOrderInfo(id));
-    }, [dispatch])
 
-    const orderInfo = useSelector((state) => state.orderDetailReducer.orderData);
-    console.log(orderInfo);
-    
-    
-    const wsOrders = useSelector((state) => state.wsReducer.orders);
-    const wsOrderData = wsOrders && wsOrders.orders;
-    
-    const orderItemInfo = wsOrderData && wsOrderData.filter((e: IOrderItem) => e._id === id)[0];
-
+    const orderItemInfo = ordersData && ordersData.orders.filter((e) => e._id === id)[0];    
     const ingredientsData = useSelector((state) => state.ingredientsReducer.ingredients);
 
     const orderPrice = orderItemInfo && orderItemInfo.ingredients.reduce(function(sum: number, ingredientId: string) {
-    const ingredientInfo = ingredientsData.filter((e: IIngredientData) => e._id === ingredientId)[0];
+        const ingredientInfo = ingredientsData.filter((e: IIngredientData) => e._id === ingredientId)[0];
 
         return sum + ingredientInfo.price;
     }, 0)    
@@ -51,9 +41,9 @@ const OrderFeedItemDetail: FC = () => {
             
             <h2 className="text text_type_main-medium  mt-15 mb-6">Состав:</h2>
             <ul className={`${styles.orderIngredientsList} mb-10`}>
-                {uniqArray && uniqArray.map((item, index) => {
+                {uniqArray && uniqArray.map((item: any, index: number) => {
                     const ingredientInfo = ingredientsData.filter((info) => info._id === item)[0];
-                    const ingredientAmount = Array.from(orderItemInfo.ingredients.entries()).filter((i) => i[1] === item).length;
+                    const ingredientAmount = Array.from(orderItemInfo.ingredients.entries()).filter((i: any) => i[1] === item).length;
                     
                     return (
                         <li key={index} className={styles.orderIngredientsList__item}>
