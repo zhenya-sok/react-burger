@@ -49,37 +49,3 @@ export type TWsOrdersActions =
     | IOrdersWsCloseAction
     | IOrdersWsMessageAction
     | IOrdersWsErrorAction;
-
-
-export interface IProfileOrdersConnectAction {
-    readonly type: typeof PROFILE_ORDERS_CONNECT;
-}
-export interface IProfileOrdersDisconnectAction {
-    readonly type: typeof PROFILE_ORDERS_DISCONNECT;
-}
-export interface IProfileOrdersWsConnectingAction {
-    readonly type: typeof PROFILE_ORDERS_WS_CONNECTING;
-}
-export interface IProfileOrdersWsOpenAction {
-    readonly type: typeof PROFILE_ORDERS_WS_OPEN;
-}
-export interface IProfileOrdersWsCloseAction {
-    readonly type: typeof PROFILE_ORDERS_WS_CLOSE;
-}
-export interface IProfileOrdersWsMessageAction {
-    readonly type: typeof PROFILE_ORDERS_WS_MESSAGE;
-    readonly payload: IWsOrder;
-}
-export interface IProfileOrdersWsErrorAction {
-    readonly type: typeof PROFILE_ORDERS_WS_ERROR;
-    readonly payload: null | TConnectionError;
-}
-
-export type TWsProfileOrdersActions = 
-    | IProfileOrdersConnectAction
-    | IProfileOrdersDisconnectAction
-    | IProfileOrdersWsConnectingAction
-    | IProfileOrdersWsOpenAction
-    | IProfileOrdersWsCloseAction
-    | IProfileOrdersWsMessageAction
-    | IProfileOrdersWsErrorAction;
