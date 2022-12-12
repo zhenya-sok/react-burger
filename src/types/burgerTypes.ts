@@ -10,4 +10,16 @@ export interface IIngredientData {
     image: string;
     image_large: string;
     image_mobile: string;
+    dragId: string;
+    position: number;
+}
+
+export type TOrderNumber = {
+    name: string;
+    order: TNumber;
+    success: boolean;
+}
+
+export type TNumber = {
+    number: number;
 }

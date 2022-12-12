@@ -1,0 +1,26 @@
+.imageBox { 
+    background: linear-gradient(rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
+    border-radius: 100px;
+    padding: 2px;
+}
+    
+.ingredientImageWrapper {
+    display: grid;
+    grid-gap: -23px;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    background: #131316;
+    border-radius: 100px;
+}
+
+.ingredientImage,
+.ingredientOpacityImage {
+    width: 112px;  
+}
+
+.ingredientOpacityImage {  
+    opacity: .6;
+}

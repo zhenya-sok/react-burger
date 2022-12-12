@@ -27,7 +27,7 @@ const Modal: FC<IModalProps> = ({children, closeModal, titleText}) => {
 
     return ReactDOM.createPortal(
         <ModalOverlay closeModal={closeModal}>
-            <div className={`${styles.modal} pl-10 pr-10 pt-10 pb-15`}>
+            <div className={`${styles.modal} pl-10 pr-10 pt-10 pb-10`}>
                 <div className={styles.modal__title}>
                     <h2 className="text text_type_main-large">{titleText}</h2>
                     <div className={styles.modal__closeBtn} onClick={closeModal}>

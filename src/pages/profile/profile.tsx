@@ -3,26 +3,32 @@ import styles from './profile.module.css';
 import { Switch, Route } from 'react-router-dom';
 import ProfileNavMenu from './profile-nav-menu/profile-nav-menu';
 import ProfileInfo from './profile-info/profile-info';
-import OrderFeed from './order-feed/order-feed';
+import ProfileOrders from '../profile/profile-orders/profile-orders';
+import PersonalOrdersFeedModal from '../../components/personal-orders-feed-modal/personal-orders-feed-modal';
 
 const Profile: FC = () => {
 
     return (
-        <section className={`${styles.profileWrapper} text text_type_main-medium`}>
-            <ProfileNavMenu />
+        <main className={`${styles.profileWrapper} text text_type_main-medium`}>
 
-            <div className={styles.contentBlock}>
                 <Switch>
                     <Route path="/profile" exact>
+                        <ProfileNavMenu />
                         <ProfileInfo />
                     </Route>
 
-                    <Route path="/profile/order" exact>
-                        <OrderFeed />
+                    <Route path="/profile/orders" exact>
+                        <ProfileNavMenu />
+                        <ProfileOrders />
+                    </Route>
+
+                    <Route path="/profile/orders/:id">
+                        <div className={styles.profile__OrderFeedItem}>
+                            <PersonalOrdersFeedModal />
+                        </div>
                     </Route>
                 </Switch>
-            </div>
-        </section>
+        </main>
     )
 }
 

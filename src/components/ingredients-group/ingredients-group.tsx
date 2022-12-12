@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ingredients-group.module.css';
 import Ingredient from '../ingredient/ingredient';
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 
 interface IIngredientsGroupProps {
     title: string;

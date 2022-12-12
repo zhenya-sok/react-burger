@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../utils/hooks/hooks';
 import { Route, Redirect, useLocation } from 'react-router-dom';
 
 interface IProtectedRouteProps {
@@ -10,7 +10,6 @@ interface IProtectedRouteProps {
 }
 
 const ProtectedRoute: FC<IProtectedRouteProps>  = ({ onlyForAuth, children, ...rest }) => {
-    // @ts-ignore
     const isAuth = useSelector((state) => !!state.authReducer.token);
     const location = useLocation<{from: { pathname: string }}>();
 

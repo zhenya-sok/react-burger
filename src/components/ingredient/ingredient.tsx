@@ -4,7 +4,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import { useDrag } from 'react-dnd';
 import { useSelectedCountById } from '../../utils/hooks/useSelectedCountById';
 import { useLocation, useHistory } from 'react-router-dom';
-import { IIngredientData } from '../../types/types';
+import { IIngredientData } from '../../types/burgerTypes';
 
 interface IIngredientProps {
     ingredientData: IIngredientData;

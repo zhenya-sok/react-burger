@@ -1,0 +1,7 @@
+.orderStatus__done {
+    color: #00CCCC;
+}
+
+.orderStatus__canceled {
+    color: #E52B1A;
+}
