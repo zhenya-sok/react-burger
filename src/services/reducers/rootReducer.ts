@@ -3,7 +3,7 @@ import { ingredientsReducer } from './ingredientsReducer';
 import { constructorReducer } from './constructorReducer';
 import { modalIngredientReducer } from './modalIngredientReducer';
 import { orderDetailReducer } from './orderDetailReducer';
-import { authReducer } from './authReducer';
+import { authReducer } from './authReducer/authReducer';
 import { wsReducer } from './wsReducer';
 import { wsProfileReducer } from './wsProfileReducer';
 

@@ -1,17 +1,19 @@
-import { IUser, IUserData } from '../../types/authTypes';
+import { IUser, IUserData } from '../../../types/authTypes';
 import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_ERROR,
+
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
+
     CHECK_AUTH_SESSION,
     LOGOUT,
     GET_USER,
     UPDATE_USER,
-} from '../constants';
-import { TAuthActions } from '../actions/authActions';
+} from '../../constants';
+import { TAuthActions } from '../../actions/authActions';
 
 type TAuthState = {
     user: undefined | IUserData | IUser;
@@ -22,7 +24,7 @@ type TAuthState = {
     token: undefined | string;
 }
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
     user: undefined,
     registerRequest: false,
     registerError: false,
@@ -46,7 +48,7 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
                 registerError: false,
                 user: action.payload,
                 registerRequest: false,
-                token: action.payload.accessToken
+                token: action.payload?.accessToken
             }
         }
         case REGISTER_USER_ERROR: {
@@ -56,7 +58,6 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
                 registerRequest: false,
             }
         }
-
         case LOGIN_REQUEST: {
             return {
                 ...state,
@@ -68,8 +69,8 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
             return {
                 ...state,
                 loginError: false,
-                user: action.payload.user,
-                token: action.payload.accessToken,
+                user: action.payload?.user,
+                token: action.payload?.accessToken,
                 loginRequest: false,
             }
         }
@@ -80,14 +81,12 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
                 loginRequest: false
             }
         }
-
         case CHECK_AUTH_SESSION: {
             return {
                 ...state,
                 token: action.payload
             }
         }
-
         case LOGOUT: {
             return {
                 ...state,
@@ -95,14 +94,12 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
                 token: undefined,
             }
         }
-
         case GET_USER: {
             return {
                 ...state,
                 user: action.payload,
             }
         }
-
         case UPDATE_USER: {
             return {
                 ...state,
