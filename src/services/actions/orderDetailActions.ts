@@ -27,7 +27,7 @@ export type TOrderDetailActions =
 export function setOrderDetail(newOrder: object) {
     return function (dispatch: AppDispatch) {
         dispatch({
-            type: SET_ORDER_DETAIL_REQUEST
+            type: SET_ORDER_DETAIL_REQUEST,
         });
         loadOrderDetails(newOrder)?.then(res => {
             if (res && res.success) {

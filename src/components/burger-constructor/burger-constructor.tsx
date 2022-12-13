@@ -14,6 +14,7 @@ import { setOrderDetail } from '../../services/actions/orderDetailActions';
 
 const BurgerConstructor: FC = () => {
     const selectedIngredients = useSelector((state) => state.constructorReducer.selectedIngredients);
+    const isLoading = useSelector((state) => state.orderDetailReducer.preloader);    
     const [orderVisible, setOrderVisible] = useState(false);
     const dispatch = useDispatch();
     const selectedBun = selectedIngredients && selectedIngredients.find((item: IIngredientData) => item.type === "bun");
@@ -204,7 +205,10 @@ const BurgerConstructor: FC = () => {
                     disabled={!selectedBun}
                     onClick={showOrderNumber}
                 >
-                    Оформить заказ
+                    {isLoading ? 
+                        <span>Оформляем...</span> :
+                        <span>Оформить заказ</span>
+                    }
                 </Button>
             </div>
             
