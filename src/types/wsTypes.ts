@@ -5,7 +5,7 @@ export interface IOrderItem {
     number: number;
     createdAt: string;
     updatedAt: string;
-    name: string;
+    name?: string;
 }
 
 export interface IWsOrder {
