@@ -2,11 +2,11 @@ import { initialState, authReducer } from './authReducer';
 import { REGISTER_USER_REQUEST, CHECK_AUTH_SESSION, GET_USER, LOGIN_ERROR, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_USER_ERROR, REGISTER_USER_SUCCESS, UPDATE_USER } from '../../constants';
 
 describe('auth reducer', () => {
-    it.only('should return the initial state', () => {
+    it('should return the initial state', () => {
         expect(authReducer(undefined, {})).toEqual(initialState)
     })
 
-    it.only('REGISTER_USER_REQUEST', () => {
+    it('REGISTER_USER_REQUEST', () => {
         expect(
             authReducer({...initialState, registerRequest: false, registerError: true}, {
                 type: REGISTER_USER_REQUEST
@@ -20,7 +20,7 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('REGISTER_USER_SUCCESS', () => {
+    it('REGISTER_USER_SUCCESS', () => {
         expect(
             authReducer(
             {...initialState,
@@ -48,7 +48,7 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('REGISTER_USER_ERROR', () => {
+    it('REGISTER_USER_ERROR', () => {
         expect(
             authReducer({...initialState, registerRequest: true, registerError: false}, {
                 type: REGISTER_USER_ERROR,
@@ -62,7 +62,7 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('LOGIN_REQUEST', () => {
+    it('LOGIN_REQUEST', () => {
         expect(
             authReducer({...initialState, loginRequest: false, loginError: true}, {
                 type: LOGIN_REQUEST,
@@ -76,7 +76,7 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('LOGIN_SUCCESS', () => {
+    it('LOGIN_SUCCESS', () => {
         expect(
             authReducer({
                 ...initialState,
@@ -109,7 +109,7 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('LOGIN_ERROR', () => {
+    it('LOGIN_ERROR', () => {
         expect(
             authReducer({...initialState, loginError: false, loginRequest: true}, {
                 type: LOGIN_ERROR,
@@ -123,7 +123,7 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('CHECK_AUTH_SESSION', () => {
+    it('CHECK_AUTH_SESSION', () => {
         expect(
             authReducer({...initialState, token: undefined}, {
                 type: CHECK_AUTH_SESSION,
@@ -141,12 +141,19 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('LOGOUT', () => {
+    it('LOGOUT', () => {
         expect(
-            authReducer(undefined, {
+            authReducer(
+            {
+                ...initialState, 
+                user: {
+                    email: "email",
+                    name: "name"
+                },
+                token: 'testAccessToken',
+            }, 
+            {
                 type: LOGOUT,
-                user: undefined,
-                token: undefined,
             })
         ).toEqual(
             {
@@ -157,7 +164,7 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('GET_USER', () => {
+    it('GET_USER', () => {
         expect(
             authReducer({...initialState, user: undefined}, {
                 type: GET_USER,
@@ -177,7 +184,7 @@ describe('auth reducer', () => {
         )
     });
 
-    it.only('UPDATE_USER', () => {
+    it('UPDATE_USER', () => {
         expect(
             authReducer({...initialState, user: undefined}, {
                 type: UPDATE_USER,

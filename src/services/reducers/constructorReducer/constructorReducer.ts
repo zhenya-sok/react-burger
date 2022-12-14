@@ -1,15 +1,15 @@
-import { IIngredientData } from '../../types/burgerTypes';
+import { IIngredientData } from '../../../types/burgerTypes';
 import {
     SELECT_INGREDIENT,
     UPDATE_CONSTRUCTOR_LIST,
-} from '../constants';
-import { TConstructorActions } from '../actions/constructorActions';
+} from '../../constants';
+import { TConstructorActions } from '../../actions/constructorActions';
 
 type TConstructorState = {
     selectedIngredients: ReadonlyArray<IIngredientData>,
 }
 
-const initialState: TConstructorState = {
+export const initialState: TConstructorState = {
     selectedIngredients: [],
 }
 

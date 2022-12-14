@@ -1,10 +1,10 @@
-import { TOrderNumber } from '../../types/burgerTypes';
+import { TOrderNumber } from '../../../types/burgerTypes';
 import {
     SET_ORDER_DETAIL_REQUEST,
     SET_ORDER_DETAIL_SUCCESS,
     SET_ORDER_DETAIL_ERROR,
-} from '../constants';
-import { TOrderDetailActions } from '../actions/orderDetailActions'
+} from '../../constants';
+import { TOrderDetailActions } from '../../actions/orderDetailActions'
 
 export type TOrderDetailState = {
     orderData: undefined | TOrderNumber,
@@ -13,7 +13,7 @@ export type TOrderDetailState = {
     preloader: boolean,
 }
 
-const initialState: TOrderDetailState = {
+export const initialState: TOrderDetailState = {
     orderData: undefined,
     orderDataRequest: false,
     orderDataError: false,

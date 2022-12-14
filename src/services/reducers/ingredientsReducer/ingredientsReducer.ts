@@ -1,10 +1,10 @@
-import { IIngredientData } from '../../types/burgerTypes';
+import { IIngredientData } from '../../../types/burgerTypes';
 import {
     ADD_INGREDIENTS_REQUEST,
     ADD_INGREDIENTS_SUCCESS,
     ADD_INGREDIENTS_ERROR,
-} from '../constants';
-import { TIngredientsActions } from '../actions/ingredientsActions';
+} from '../../constants';
+import { TIngredientsActions } from '../../actions/ingredientsActions';
 
 type TIngredientsState = {
     ingredients: IIngredientData[];
@@ -13,7 +13,7 @@ type TIngredientsState = {
 };
   
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsError: false,
