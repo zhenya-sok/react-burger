@@ -36,7 +36,7 @@ const Ingredient: FC<IIngredientProps> = ({ ingredientData, showDetails }) => {
     }
 
     return (
-        <div ref={dragRef} style={{ opacity }} onClick={() => navigate(ingredientData._id)}>
+        <div ref={dragRef} style={{ opacity }} onClick={() => navigate(ingredientData._id)} data-cy="ingredient">
             <div className={`${styles.ingredientsItem}`} onClick={() => chooseIngredient(ingredientData)}>
                 <img className={`${styles.ingredientsItem__image} pr-4 pl-4`} src={ingredientData.image} alt="изображение ингредиента" />
                 <div className={`${styles.ingredientsItem__price} mt-1 mb-1`}>
