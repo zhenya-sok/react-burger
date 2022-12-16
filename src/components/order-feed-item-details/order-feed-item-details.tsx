@@ -41,9 +41,9 @@ const OrderFeedItemDetail: FC<IOrderFeedItemDetailProps> = ({ ordersData }) => {
             
             <h2 className="text text_type_main-medium  mt-15 mb-6">Состав:</h2>
             <ul className={`${styles.orderIngredientsList} mb-10`}>
-                {uniqArray && uniqArray.map((item: any, index: number) => {
+                {uniqArray && uniqArray.map((item, index: number) => {
                     const ingredientInfo = ingredientsData.filter((info) => info._id === item)[0];
-                    const ingredientAmount = Array.from(orderItemInfo.ingredients.entries()).filter((i: any) => i[1] === item).length;
+                    const ingredientAmount = Array.from(orderItemInfo.ingredients.entries()).filter((i) => i[1] === item).length;
                     
                     return (
                         <li key={index} className={styles.orderIngredientsList__item}>

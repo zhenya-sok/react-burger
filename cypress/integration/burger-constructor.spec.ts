@@ -5,9 +5,10 @@ describe('service is available', function() {
 
   const USER_EMAIL = 'sockolovzhe@gmail.com';
   const USER_PASSWORD = 'hello';
+  const INGREDIENT = '[data-cy="ingredient"]';
 
   beforeEach(function() {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
   });
 
   it('should open burger-constructor page by default', function() {
@@ -19,7 +20,7 @@ describe('service is available', function() {
   });
 
   it('should open and close modal with detail information about ingredient', function() {
-    cy.get('[data-cy="ingredient"]').first().as('ingredient');
+    cy.get(INGREDIENT).first().as('ingredient');
     cy.get('@ingredient').should('be.visible').click();
 
     cy.get('[class^=modal_modal__]').contains('Краторная булка N-200i');
@@ -27,12 +28,12 @@ describe('service is available', function() {
   });
 
   it('should drag ingredient to the constructor and create order', function() {
-    cy.get('[data-cy="ingredient"]').first().as('ingredient-bun');
+    cy.get(INGREDIENT).first().as('ingredient-bun');
     cy.get('[class^=burger-constructor_constructorWrapper__]').as('drop-zone');
     cy.get('@ingredient-bun').drag('@drop-zone');
     cy.get('.counter').should('contain', 2);
 
-    cy.get('[data-cy="ingredient"]').last().as('ingredient-main');
+    cy.get(INGREDIENT).last().as('ingredient-main');
     cy.get('@ingredient-main').drag('@drop-zone');
 
     cy.get("button").contains('Оформить заказ').as('order-button');
