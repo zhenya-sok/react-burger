@@ -12,7 +12,7 @@ const OrderIngredientImage: FC<IOrderIngredientImageProps> = ({ ingredientId, is
 
     const ingredientsData = useSelector((state) => state.ingredientsReducer.ingredients);
 
-    const ingredientImage = ingredientsData.filter((item: IIngredientData) => item._id === ingredientId)[0].image; 
+    const ingredientImage = ingredientsData && ingredientsData.filter((item: IIngredientData) => item._id === ingredientId)[0]?.image; 
 
     return (
         <>

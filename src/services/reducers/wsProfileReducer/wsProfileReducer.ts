@@ -1,56 +1,56 @@
 import {
-    ORDERS_WS_CONNECTING,
-    ORDERS_WS_OPEN,
-    ORDERS_WS_CLOSE,
-    ORDERS_WS_MESSAGE,
-    ORDERS_WS_ERROR
-} from '../constants/index';
-import { TWsOrdersActions } from '../actions/wsAction';
-import { IWsOrder, TConnectionError, WebsocketStatus } from '../../types/wsTypes';
+    PROFILE_ORDERS_WS_CONNECTING,
+    PROFILE_ORDERS_WS_OPEN,
+    PROFILE_ORDERS_WS_CLOSE,
+    PROFILE_ORDERS_WS_MESSAGE,
+    PROFILE_ORDERS_WS_ERROR
+} from '../../constants/index';
+import { IWsOrder, TConnectionError, WebsocketStatus } from '../../../types/wsTypes';
+import { TWsProfileOrdersActions } from '../../actions/wsProfileActions';
 
-export type TWsOrdersState = {
+export type TWsProfileOrdersState = {
     status: WebsocketStatus,
     connectionError: null | TConnectionError,
     orders: null | IWsOrder,
 }
 
-const initialState: TWsOrdersState = {
+export const initialState: TWsProfileOrdersState = {
     status: WebsocketStatus.OFFLINE,
     connectionError: null,
     orders: null,
 };
 
-export const wsReducer = (state = initialState, action: TWsOrdersActions): TWsOrdersState => {
+export const wsProfileReducer = (state = initialState, action: TWsProfileOrdersActions): TWsProfileOrdersState => {
     switch (action.type) {
-        case ORDERS_WS_CONNECTING: {
+        case PROFILE_ORDERS_WS_CONNECTING: {
             return {
                 ...state,
                 status: WebsocketStatus.CONNECTING
             };
         }
 
-        case ORDERS_WS_OPEN: {
+        case PROFILE_ORDERS_WS_OPEN: {
             return {
                 ...state,
                 status: WebsocketStatus.ONLINE
             };
         }
             
-        case ORDERS_WS_CLOSE: {
+        case PROFILE_ORDERS_WS_CLOSE: {
             return {
                 ...state,
                 status: WebsocketStatus.OFFLINE
             };
         }
             
-        case ORDERS_WS_ERROR: {
+        case PROFILE_ORDERS_WS_ERROR: {
             return {
                 ...state,
                 connectionError: action.payload
             };
         }
             
-        case ORDERS_WS_MESSAGE: {
+        case PROFILE_ORDERS_WS_MESSAGE: {
             return {
                 ...state,
                 orders: action.payload

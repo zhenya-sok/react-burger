@@ -28,7 +28,7 @@ const Login: FC = () => {
             <h1>Вход</h1>
 
             <form onSubmit={handleSubmit}>
-                <div className={`${styles.loginInput} mt-6 mb-6`}>
+                <div className={`${styles.loginInput} mt-6 mb-6`} data-cy="email">
                     <Input
                         type={'email'}
                         placeholder={'E-mail'}
@@ -41,7 +41,7 @@ const Login: FC = () => {
                     />
                 </div>
 
-                <div className={`${styles.loginInput} mb-6`}>
+                <div className={`${styles.loginInput} mb-6`} data-cy="password">
                     <PasswordInput
                         onChange={onPasswordChange}
                         value={passwordValue}

@@ -38,7 +38,7 @@ const OrderFeedItem: FC<IOrderFeedItemProps> = ({ wsOrderDetail }) => {
     const orderPrice = wsOrderDetail.ingredients.reduce(function(sum, ingredientId) {
         const ingredientInfo = ingredinentsData && ingredinentsData.filter((e) => e._id === ingredientId)[0];
 
-        return sum + ingredientInfo.price;
+        return sum + (ingredientInfo && ingredientInfo.price);
     }, 0)
 
     const unvisibleIngredientsLength = wsOrderDetail.ingredients.length - visibleIngredients.length;

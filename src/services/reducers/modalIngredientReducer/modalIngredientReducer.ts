@@ -1,14 +1,14 @@
-import { IIngredientData } from '../../types/burgerTypes';
+import { IIngredientData } from '../../../types/burgerTypes';
 import {
     SET_CURRENT_ITEM,
-} from '../constants';
-import { TModalIngredientActions } from '../actions/modalIngredientActions';
+} from '../../constants';
+import { TModalIngredientActions } from '../../actions/modalIngredientActions';
 
 type TModalIngredientState = {
     currentItem: IIngredientData | null,
 }
 
-const initialState: TModalIngredientState = {
+export const initialState: TModalIngredientState = {
     currentItem: null,
 }
 

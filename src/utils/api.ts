@@ -7,7 +7,7 @@ function request(url: string, options: object) {
   return fetch(url, options).then(checkResponse)
 }
 
-const ingredientsListUrl = `${BASE_URL}/ingredients`;
+export const ingredientsListUrl = `${BASE_URL}/ingredients`;
 
 export function loadIngredients() {
   return fetchWithRefresh(ingredientsListUrl)
